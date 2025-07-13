@@ -27,3 +27,5 @@ jobs:
         run: |
             emcmake cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
             emmake make -C build
+            cp ./Makefile /home/runner/work/etlegacy/etlegacy/build/libs/openssl/src/bundled_openssl
+            emmake make -C build
