@@ -1,0 +1,30 @@
+diff --git a/easybuild.sh b/easybuild.sh
+index 06b90f687..743da6ad0 100755
+--- a/easybuild.sh
++++ b/easybuild.sh
+@@ -262,6 +262,7 @@ print_startup() {
+ 	checkapp zip
+ 	checkapp nasm
+ 	checkapp entr 0
++	checkapp emcmake
+ 	echo
+ 
+ 	check_compiler
+@@ -382,7 +383,7 @@ parse_commandline() {
+ 					einfo "Will use toolchain file: ${TOOLCHAIN_FILE}"
+ 				else
+ 					einfo "Will use default RPI toolchain file"
+-					TOOLCHAIN_FILE=${_SRC}/cmake/Toolchain-cross-aarch64-linux.cmake
++					TOOLCHAIN_FILE="/home/rafal/Desktop/emsdk/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake"
+ 				fi
+ 			fi
+ 			CROSS_COMPILE32=0
+@@ -750,7 +751,7 @@ run_generate() {
+ 	einfo "Generating makefiles: ${MAKEFILE_GENERATOR}..."
+ 	mkdir -p "${BUILDDIR}"
+ 	cd "${BUILDDIR}"
+-	cmake -G "${MAKEFILE_GENERATOR}" "${cmake_args[@]}" ..
++	emcmake cmake -G "${MAKEFILE_GENERATOR}" "${cmake_args[@]}" ..
+ 	check_exit
+ }
+ 

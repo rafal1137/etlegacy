@@ -1,0 +1,112 @@
+diff --git a/cmake/ETLSetupFeatures.cmake b/cmake/ETLSetupFeatures.cmake
+index dcd884f70..469a41737 100644
+--- a/cmake/ETLSetupFeatures.cmake
++++ b/cmake/ETLSetupFeatures.cmake
+@@ -10,7 +10,7 @@ set(SRC "${PROJECT_SOURCE_DIR}/src")
+ #-----------------------------------------------------------------
+ if(BUILD_CLIENT)
+ 
+-	if(NOT WIN32 AND NOT APPLE AND NOT ANDROID) # Dependency of GLEW and SDL_syswm.h
++	if(NOT WIN32 AND NOT APPLE AND NOT ANDROID AND NOT EMSCRIPTEN) # Dependency of GLEW and SDL_syswm.h
+ 		find_package(X11 REQUIRED)
+ 		target_include_directories(client_libraries INTERFACE ${X11_INCLUDE_DIR})
+ 	endif()
+diff --git a/easybuild.sh b/easybuild.sh
+index 06b90f687..743da6ad0 100755
+--- a/easybuild.sh
++++ b/easybuild.sh
+@@ -262,6 +262,7 @@ print_startup() {
+ 	checkapp zip
+ 	checkapp nasm
+ 	checkapp entr 0
++	checkapp emcmake
+ 	echo
+ 
+ 	check_compiler
+@@ -382,7 +383,7 @@ parse_commandline() {
+ 					einfo "Will use toolchain file: ${TOOLCHAIN_FILE}"
+ 				else
+ 					einfo "Will use default RPI toolchain file"
+-					TOOLCHAIN_FILE=${_SRC}/cmake/Toolchain-cross-aarch64-linux.cmake
++					TOOLCHAIN_FILE="/home/rafal/Desktop/emsdk/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake"
+ 				fi
+ 			fi
+ 			CROSS_COMPILE32=0
+@@ -750,7 +751,7 @@ run_generate() {
+ 	einfo "Generating makefiles: ${MAKEFILE_GENERATOR}..."
+ 	mkdir -p "${BUILDDIR}"
+ 	cd "${BUILDDIR}"
+-	cmake -G "${MAKEFILE_GENERATOR}" "${cmake_args[@]}" ..
++	emcmake cmake -G "${MAKEFILE_GENERATOR}" "${cmake_args[@]}" ..
+ 	check_exit
+ }
+ 
+diff --git a/src/qcommon/q_platform.h b/src/qcommon/q_platform.h
+index fd08f75ad..c2081647d 100644
+--- a/src/qcommon/q_platform.h
++++ b/src/qcommon/q_platform.h
+@@ -181,6 +181,22 @@
+ 
+ #endif
+ 
++//================================================================== ETLJS ===
++
++#ifdef EMSCRIPTEN
++
++#define OS_STRING "emscripten"
++#define ID_INLINE
++#define PATH_SEP '/'
++
++#define ARCH_STRING ""
++
++#define DLL_EXT ".js"
++
++#define Q3_LITTLE_ENDIAN
++
++#endif
++
+ //================================================================= LINUX ===
+ 
+ #if defined(__linux__) || defined(__FreeBSD_kernel__)
+diff --git a/src/qcommon/q_shared.h b/src/qcommon/q_shared.h
+index 2fdb49428..0331cb073 100644
+--- a/src/qcommon/q_shared.h
++++ b/src/qcommon/q_shared.h
+@@ -195,6 +195,10 @@
+ 
+ #endif // _WIN32
+ 
++#ifdef __EMSCRIPTEN__
++#define CPUSTRING   "js"
++#endif
++
+ //======================= MAC OS DEFINES =================================
+ 
+ #if defined(__APPLE__)
+diff --git a/src/sys/sys_main.c b/src/sys/sys_main.c
+index 69aee2e87..29155503b 100644
+--- a/src/sys/sys_main.c
++++ b/src/sys/sys_main.c
+@@ -66,6 +66,10 @@
+ #include <CoreFoundation/CoreFoundation.h>
+ #endif
+ 
++#ifdef __EMSCRIPTEN__
++#include <emscripten.h>
++#endif
++
+ #ifdef __ANDROID__
+ #include <jni.h>
+ qboolean call_copyIntoAPPDirectory(JNIEnv *env, jobject javaObject, const char *filename)
+@@ -1307,7 +1311,11 @@ static int Sys_GameLoop(void)
+ 
+ 		// Improve input responsiveness by moving sampling to other side of framerate limiter - moved to Com_Frame()
+ 		//IN_Frame();
++#ifdef __EMSCRIPTEN__
++		emscripten_set_main_loop(Com_Frame(), 0, 1);
++#else
+ 		Com_Frame();
++#endif
+ 
+ #ifdef ETLEGACY_DEBUG
+ 		endTime    = Sys_Milliseconds();

@@ -66,6 +66,10 @@
 #include <CoreFoundation/CoreFoundation.h>
 #endif
 
+#ifdef __EMSCRIPTEN__
+#include <emscripten.h>
+#endif
+
 #ifdef __ANDROID__
 #include <jni.h>
 qboolean call_copyIntoAPPDirectory(JNIEnv *env, jobject javaObject, const char *filename)
@@ -1307,7 +1311,11 @@ static int Sys_GameLoop(void)
 
 		// Improve input responsiveness by moving sampling to other side of framerate limiter - moved to Com_Frame()
 		//IN_Frame();
+#ifdef __EMSCRIPTEN__
+		emscripten_set_main_loop(Com_Frame(), 0, 1);
+#else
 		Com_Frame();
+#endif
 
 #ifdef ETLEGACY_DEBUG
 		endTime    = Sys_Milliseconds();

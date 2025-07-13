@@ -8,7 +8,7 @@
 cmake_minimum_required(VERSION 3.10.3 FATAL_ERROR)
 
 project(ETLEGACY C CXX)
-
+#set(CMAKE_EXECUTABLE_SUFFIX ".js")
 if(${CMAKE_VERSION} VERSION_GREATER_EQUAL "3.21")
     cmake_policy(SET CMP0121 NEW)
 endif()
@@ -209,7 +209,7 @@ endif(BUILD_MOD)
 
 #-----------------------------------------------------------------
 # Post build
-#-----------------------------------------------------------------
+	#-----------------------------------------------------------------
 
 # Install third-party add-ons
 if(BUILD_MOD AND INSTALL_EXTRA)

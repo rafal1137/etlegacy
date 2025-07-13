@@ -10,7 +10,7 @@ set(SRC "${PROJECT_SOURCE_DIR}/src")
 #-----------------------------------------------------------------
 if(BUILD_CLIENT)
 
-	if(NOT WIN32 AND NOT APPLE AND NOT ANDROID) # Dependency of GLEW and SDL_syswm.h
+	if(NOT WIN32 AND NOT APPLE AND NOT ANDROID AND NOT EMSCRIPTEN) # Dependency of GLEW and SDL_syswm.h
 		find_package(X11 REQUIRED)
 		target_include_directories(client_libraries INTERFACE ${X11_INCLUDE_DIR})
 	endif()
@@ -63,8 +63,14 @@ if(BUILD_CLIENT)
 			message(STATUS "Using legacy OpenGL instead of GLVND")
 			set(OpenGL_GL_PREFERENCE LEGACY)
 		endif ()
-		find_package(OpenGL REQUIRED COMPONENTS OpenGL)
-		target_link_libraries(opengl_renderer_libs INTERFACE OpenGL::GL)
+		if (EMSCRIPTEN)
+			message(STATUS "Using Emscripten WebGL instead of OpenGL")
+			# No need to find OpenGL; Emscripten provides it via WebGL
+			target_link_options(opengl_renderer_libs INTERFACE -sUSE_WEBGL2=1)
+		else()
+			find_package(OpenGL REQUIRED COMPONENTS OpenGL)
+			target_link_libraries(opengl_renderer_libs INTERFACE OpenGL::GL)
+		endif()
 		target_include_directories(opengl_renderer_libs INTERFACE ${OPENGL_INCLUDE_DIR})
 
 		target_link_libraries(renderer_gl1_libraries INTERFACE opengl_renderer_libs)

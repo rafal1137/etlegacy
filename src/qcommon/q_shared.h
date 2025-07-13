@@ -195,6 +195,10 @@
 
 #endif // _WIN32
 
+#ifdef __EMSCRIPTEN__
+#define CPUSTRING   "js"
+#endif
+
 //======================= MAC OS DEFINES =================================
 
 #if defined(__APPLE__)

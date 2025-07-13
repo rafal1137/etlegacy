@@ -374,6 +374,9 @@ parse_commandline() {
 		elif [ "$var" = "-noupdate" ] || [  "$var" = "-no-update" ]; then
 			einfo "Will disable autoupdate"
 			FEATURE_AUTOUPDATE=0
+		elif [ "$var" = "-emscripten" ]; then
+			einfo "Will enable Emscripten build ..."
+			TOOLCHAIN_FILE="${EMSCRIPTEN}/cmake/Modules/Platform/Emscripten.cmake"
 		elif [ "$var" = "-RPI" ] || [  "$var" = "-RPIT" ]; then
 			einfo "Will enable Raspberry PI build ..."
 			# If we are using RPIT (T for the toolchain) then we will use the default toolchain file
