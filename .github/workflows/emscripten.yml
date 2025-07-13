@@ -22,3 +22,8 @@ jobs:
       - name: Setup
         run: |
             sudo apt install cmake autoconf libtool zip nasm  -y
+
+      - name: Build
+        run: |
+            emcmake cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+            emmake make -C build
