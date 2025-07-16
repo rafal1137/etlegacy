@@ -25,5 +25,6 @@ jobs:
 
       - name: Build
         run: |
+            sudo chmod +x ./easybuild.sh
             ./easybuild.sh generate -emscripten
             emmake make --directory build
