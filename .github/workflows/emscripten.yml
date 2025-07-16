@@ -21,7 +21,7 @@ jobs:
 
       - name: Setup
         run: |
-            sudo apt install cmake autoconf libtool zip nasm  -y
+            sudo apt install cmake autoconf libtool zip nasm make -y
 
       - name: Build
         run: |
