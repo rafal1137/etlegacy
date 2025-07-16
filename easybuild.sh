@@ -377,6 +377,18 @@ parse_commandline() {
 		elif [ "$var" = "-emscripten" ]; then
 			einfo "Will enable Emscripten build ..."
 			TOOLCHAIN_FILE="${EMSCRIPTEN}/cmake/Modules/Platform/Emscripten.cmake"
+			BUNDLED_WOLFSSL=1
+			BUNDLED_OPENSSL=0
+			BUNDLED_OPENAL=0
+			FEATURE_OPENAL=0
+			BUNDLED_OGG_VORBIS=0
+			FEATURE_OGG_VORBIS=0
+			BUNDLED_THEORA=0
+			FEATURE_THEORA=0
+			RENDERER_DYNAMIC=0
+			FEATURE_RENDERER1=1
+			FEATURE_RENDERER_GLES=0
+			BUILD_MOD_PK3=0
 		elif [ "$var" = "-RPI" ] || [  "$var" = "-RPIT" ]; then
 			einfo "Will enable Raspberry PI build ..."
 			# If we are using RPIT (T for the toolchain) then we will use the default toolchain file
