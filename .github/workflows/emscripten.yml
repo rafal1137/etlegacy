@@ -9,8 +9,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    container:
+      image: emscripten/emsdk
     steps:
-      - uses: mymindstorm/setup-emsdk@v14
 
       - name: Verify
         run: emcc -v
@@ -25,7 +26,6 @@ jobs:
 
       - name: Build
         run: |
-            source "/home/runner/work/_temp/4bf09e2b-6f49-48a3-ba16-3e53f4dae07b/emsdk-main/emsdk_env.sh"
             sudo chmod +x ./easybuild.sh
             ./easybuild.sh generate -emscripten
             emmake make --directory build
