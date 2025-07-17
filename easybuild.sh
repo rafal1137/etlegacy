@@ -376,7 +376,7 @@ parse_commandline() {
 			FEATURE_AUTOUPDATE=0
 		elif [ "$var" = "-emscripten" ]; then
 			einfo "Will enable Emscripten build ..."
-			TOOLCHAIN_FILE="${EMSCRIPTEN}/cmake/Modules/Platform/Emscripten.cmake"
+			TOOLCHAIN_FILE="${EMSDK}/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake"
 			BUNDLED_WOLFSSL=1
 			BUNDLED_OPENSSL=0
 			BUNDLED_OPENAL=0
