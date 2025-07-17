@@ -38,6 +38,30 @@ else()
 	add_executable(etl ${COMMON_SRC} ${CLIENT_SRC} ${PLATFORM_SRC} ${PLATFORM_CLIENT_SRC})
 endif()
 
+if(EMSCRIPTEN)
+    set_target_properties(etl PROPERTIES
+        SUFFIX ".js"
+        OUTPUT_NAME "etl"
+    )
+
+    set(EMSCRIPTEN_LINKER_FLAGS
+        "-s EXPORTED_FUNCTIONS='[\"_main\"]'"
+        "-s EXPORTED_RUNTIME_METHODS='[\"ccall\",\"cwrap\"]'"
+        "-s MODULARIZE=1"
+        "-s SINGLE_FILE=0"
+        "-s ALLOW_MEMORY_GROWTH=1"
+        "-s ASSERTIONS=1"
+        "-s INITIAL_MEMORY=256MB"
+        "-s FORCE_FILESYSTEM=1"
+        "-s ENVIRONMENT=web"
+        "-s USE_PTHREADS=0"
+    )
+
+    string(REPLACE ";" " " EMSCRIPTEN_LINKER_FLAGS_STR "${EMSCRIPTEN_LINKER_FLAGS}")
+    set_target_properties(etl PROPERTIES LINK_FLAGS "${EMSCRIPTEN_LINKER_FLAGS_STR}")
+
+endif()
+
 target_link_libraries(etl
 	client_libraries
 	engine_libraries

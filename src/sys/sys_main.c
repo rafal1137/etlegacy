@@ -66,6 +66,10 @@
 #include <CoreFoundation/CoreFoundation.h>
 #endif
 
+#ifdef __EMSCRIPTEN__
+#include <emscripten.h>
+#endif
+
 #ifdef __ANDROID__
 #include <jni.h>
 qboolean call_copyIntoAPPDirectory(JNIEnv *env, jobject javaObject, const char *filename)
@@ -1336,6 +1340,15 @@ static int Sys_GameLoop(void)
 	return return_code;
 }
 
+#ifdef __EMSCRIPTEN__
+// Wrapper function
+EMSCRIPTEN_KEEPALIVE void Sys_GameLoop_Wrapper(void)
+{
+    Sys_GameLoop();
+}
+#endif
+
+
 /**
  * @brief SDL_main
  * @param[in] argc
@@ -1464,6 +1477,10 @@ int main(int argc, char **argv)
 #endif
 
 #endif
-
+#ifndef __EMSCRIPTEN
 	return Sys_GameLoop();
+#else
+	emscripten_set_main_loop(Sys_GameLoop_Wrapper, 60, 1);
+	return 0;
+#endif
 }

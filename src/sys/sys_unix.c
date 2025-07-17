@@ -41,7 +41,9 @@
 #include "../qcommon/qcommon.h"
 #include "sys_local.h"
 
+#ifndef __EMSCRIPTEN__
 #include <execinfo.h>
+#endif
 #include <signal.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -1303,16 +1305,20 @@ void Sys_Backtrace(int sig)
 	size_t size;
 
 	// Get the backtrace and write it to stderr
+#ifndef __EMSCRIPTEN__
 #ifndef __ANDROID__
 	size = backtrace(syms, 32);
+#endif
 #endif
 	fprintf(stderr, "--- Report this to the project - START ---\n");
 	fprintf(stderr, "ERROR: Caught SIGSEGV(%d)\n", sig);
 	fprintf(stderr, "VERSION: %s (%s)\n", ETLEGACY_VERSION, ETLEGACY_VERSION_SHORT);
 	fprintf(stderr, "BTIME: %s\n", PRODUCT_BUILD_TIME);
 	fprintf(stderr, "BACKTRACE:\n");
+#ifndef __EMSCRIPTEN__
 #ifndef __ANDROID__
 	backtrace_symbols_fd(syms, size, STDERR_FILENO);
+#endif
 #endif
 	fprintf(stderr, "--- Report this to the project -  END  ---\n");
 

@@ -14,7 +14,11 @@ endif()
 # cgame
 #
 if(BUILD_CLIENT_MOD)
-	add_library(cgame MODULE ${CGAME_SRC})
+	if(EMSCRIPTEN)
+		add_library(cgame STATIC ${CGAME_SRC})
+	else()
+		add_library(cgame MODULE ${CGAME_SRC})
+	endif()
 	target_link_libraries(cgame cgame_libraries mod_libraries)
 
 	set_target_properties(cgame
@@ -33,7 +37,11 @@ endif()
 # ui
 #
 if(BUILD_CLIENT_MOD)
-	add_library(ui MODULE ${UI_SRC})
+	if(EMSCRIPTEN)
+		add_library(ui STATIC ${UI_SRC})
+	else()
+		add_library(ui MODULE ${UI_SRC})
+	endif()
 	target_link_libraries(ui ui_libraries mod_libraries)
 
 	set_target_properties(ui
@@ -52,7 +60,11 @@ endif()
 # qagame
 #
 if(BUILD_SERVER_MOD)
-	add_library(qagame MODULE ${QAGAME_SRC})
+	if(EMSCRIPTEN)
+		add_library(qagame STATIC ${QAGAME_SRC})
+	else()
+		add_library(qagame MODULE ${QAGAME_SRC})
+	endif()
 	target_link_libraries(qagame qagame_libraries mod_libraries)
 
 	if(FEATURE_LUASQL AND FEATURE_DBMS)
@@ -97,7 +109,11 @@ endif()
 # tvgame
 #
 if(BUILD_SERVER_MOD)
-	add_library(tvgame MODULE ${TVGAME_SRC})
+	if(EMSCRIPTEN)
+		add_library(tvgame STATIC ${TVGAME_SRC})
+	else()
+		add_library(tvgame MODULE ${TVGAME_SRC})
+	endif()
 	target_link_libraries(tvgame tvgame_libraries mod_libraries)
 
 	if(FEATURE_LUASQL AND FEATURE_DBMS)

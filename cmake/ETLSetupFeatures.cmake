@@ -10,7 +10,7 @@ set(SRC "${PROJECT_SOURCE_DIR}/src")
 #-----------------------------------------------------------------
 if(BUILD_CLIENT)
 
-	if(NOT WIN32 AND NOT APPLE AND NOT ANDROID) # Dependency of GLEW and SDL_syswm.h
+	if(NOT WIN32 AND NOT APPLE AND NOT ANDROID AND NOT EMSCRIPTEN) # Dependency of GLEW and SDL_syswm.h
 		find_package(X11 REQUIRED)
 		target_include_directories(client_libraries INTERFACE ${X11_INCLUDE_DIR})
 	endif()
@@ -73,8 +73,14 @@ if(BUILD_CLIENT)
 	endif()
 
 	if(FEATURE_RENDERER_GLES)
-		find_package(GLES REQUIRED)
-		target_link_libraries(renderer_gles_libraries INTERFACE ${GLES_LIBRARY})
+		if(EMSCRIPTEN)
+		    message(STATUS "Building with Emscripten, using WebGL 1.0 (OpenGL ES 1.0)")
+		    # Link WebGL 1.0 flags for Emscripten
+		    target_link_libraries(renderer_gles_libraries INTERFACE "-sLEGACY_GL_EMULATION=1 -sGL_ASSERTIONS=1")
+		else()
+			find_package(GLES REQUIRED)
+			target_link_libraries(renderer_gles_libraries INTERFACE ${GLES_LIBRARY})
+		endif()
 		target_include_directories(renderer_gles_libraries INTERFACE ${GLES_INCLUDE_DIR})
 	endif()
 

@@ -601,7 +601,10 @@ void RB_BeginDrawingView(void)
 		plane2[3] = DotProduct(plane, backEnd.viewParms.orientation.origin) - plane[3];
 
 		glLoadMatrixf(s_flipMatrix);
+#ifndef __EMSCRIPTEN__
+		// its not available in Emscripten GLES 1
 		glClipPlanef(GL_CLIP_PLANE0, plane2);
+#endif
 		glEnable(GL_CLIP_PLANE0);
 	}
 	else
