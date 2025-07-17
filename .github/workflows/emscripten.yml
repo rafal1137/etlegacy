@@ -5,6 +5,7 @@ on:
     branches: [ "emscriptenv2" ]
   pull_request:
     branches: [ "emscriptenv2" ]
+  workflow_dispatch:
 
 env:
   EMSCRIPTEN: ${EMSDK}/upstream/emscripten
