@@ -1,0 +1,37 @@
+name: Emscripten
+
+on:
+  push:
+    branches: [ "emscriptenv2" ]
+  pull_request:
+    branches: [ "emscriptenv2" ]
+
+env:
+  EMSCRIPTEN: ${EMSDK}/upstream/emscripten
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: emscripten/emsdk
+    steps:
+
+      - name: Verify
+        run: emcc -v
+
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Setup
+        run: |
+            sudo apt update
+            sudo apt install cmake zip make autoconf libtool nasm ninja-build -y
+
+      - name: Build
+        run: |
+            git apply --directory=libs ./bundled_libs.patch
+            sudo chmod +x ./easybuild.sh
+            ./easybuild.sh generate -emscripten
+            emmake make --directory build
+
