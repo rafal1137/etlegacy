@@ -30,7 +30,7 @@ jobs:
 
       - name: Build
         run: |
-            git apply --directory=./libs ./bundled_libs.patch
+            git apply --directory=libs ./bundled_libs.patch
             sudo chmod +x ./easybuild.sh
             ./easybuild.sh generate -emscripten
             emmake make --directory build
