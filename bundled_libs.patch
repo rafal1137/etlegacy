@@ -1,0 +1,14 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index db33ce56..f953073f 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -541,6 +541,9 @@ if(BUNDLED_CURL AND (BUILD_CLIENT OR BUILD_SERVER))
+ 						-DCMAKE_LIBRARY_PATH=${LIBS_BINARY_DIR}/wolfssl/lib
+ 						-DCMAKE_INCLUDE_PATH=${LIBS_BINARY_DIR}/wolfssl/include
+ 				)
++				if(EMSCRIPTEN)
++					list(APPEND CURL_CMAKE_ARGS -DWolfSSL_INCLUDE_DIR=${LIBS_BINARY_DIR}/wolfssl/include -DWolfSSL_LIBRARY=${WOLFSSL_BUNDLED_LIBRARY})
++				endif()
+ 			elseif(BUNDLED_OPENSSL)
+ 				list(APPEND CURL_CMAKE_ARGS -DOPENSSL_ROOT_DIR=${OPENSSL_PREFIX} -DOPENSSL_USE_STATIC_LIBS=ON -DCURL_USE_OPENSSL=ON -DCURL_USE_WOLFSSL=OFF)
+ 			else()
