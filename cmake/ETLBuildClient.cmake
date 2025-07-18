@@ -45,7 +45,7 @@ if(EMSCRIPTEN)
     )
 
     set(EMSCRIPTEN_LINKER_FLAGS
-	  "-s EXPORTED_FUNCTIONS='[\"_main\", \"_Sys_GameLoop_Wrapper\"]'"
+	  "-s EXPORTED_FUNCTIONS='[\"_main\"]'"
 	  "-s EXPORTED_RUNTIME_METHODS='[\"ccall\", \"cwrap\", \"FS\"]'"
 	  "-s MODULARIZE=1"
 	  "-s SINGLE_FILE=0"
