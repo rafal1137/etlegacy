@@ -46,7 +46,7 @@ if(EMSCRIPTEN)
 
     set(EMSCRIPTEN_LINKER_FLAGS
         "-s EXPORTED_FUNCTIONS='[\"_main\"]'"
-        "-s EXPORTED_RUNTIME_METHODS='[\"ccall\",\"cwrap\"]'"
+        "-s EXPORTED_RUNTIME_METHODS='[\"ccall\", \"cwrap\", \"FS\"]'"
         "-s MODULARIZE=1"
         "-s SINGLE_FILE=0"
         "-s ALLOW_MEMORY_GROWTH=1"
