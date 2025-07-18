@@ -45,17 +45,19 @@ if(EMSCRIPTEN)
     )
 
     set(EMSCRIPTEN_LINKER_FLAGS
-        "-s EXPORTED_FUNCTIONS='[\"_main\"]'"
-        "-s EXPORTED_RUNTIME_METHODS='[\"ccall\", \"cwrap\", \"FS\"]'"
-        "-s MODULARIZE=1"
-        "-s SINGLE_FILE=0"
-        "-s ALLOW_MEMORY_GROWTH=1"
-        "-s ASSERTIONS=1"
-        "-s INITIAL_MEMORY=256MB"
-        "-s FORCE_FILESYSTEM=1"
-        "-s ENVIRONMENT=web,worker,node"
-        "-s USE_PTHREADS=0"
-    )
+	  "-s EXPORTED_FUNCTIONS='[\"_main\", \"_Sys_GameLoop_Wrapper\"]'"
+	  "-s EXPORTED_RUNTIME_METHODS='[\"ccall\", \"cwrap\", \"FS\"]'"
+	  "-s MODULARIZE=1"
+	  "-s SINGLE_FILE=0"
+	  "-s ALLOW_MEMORY_GROWTH=1"
+	  "-s ASSERTIONS=1"
+	  "-s INITIAL_MEMORY=256MB"
+	  "-s FORCE_FILESYSTEM=1"
+	  "-s ENVIRONMENT=web,worker,node"
+	  "-s USE_PTHREADS=0"
+	  "-s GL_UNSAFE_OPTS=0"
+	  "-s EXIT_RUNTIME=1"
+	)
 
     string(REPLACE ";" " " EMSCRIPTEN_LINKER_FLAGS_STR "${EMSCRIPTEN_LINKER_FLAGS}")
     set_target_properties(etl PROPERTIES LINK_FLAGS "${EMSCRIPTEN_LINKER_FLAGS_STR}")
