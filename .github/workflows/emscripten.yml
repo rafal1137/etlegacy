@@ -41,5 +41,5 @@ jobs:
           name: js-wasm
           path: |
             build/etl*.js
-            build/legacy/etl*.wasm
+            build/etl*.wasm
           if-no-files-found: error
