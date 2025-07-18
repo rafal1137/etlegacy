@@ -53,7 +53,7 @@ if(EMSCRIPTEN)
         "-s ASSERTIONS=1"
         "-s INITIAL_MEMORY=256MB"
         "-s FORCE_FILESYSTEM=1"
-        "-s ENVIRONMENT=web"
+        "-s ENVIRONMENT=web,worker,node"
         "-s USE_PTHREADS=0"
     )
 
