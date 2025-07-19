@@ -56,7 +56,7 @@ if(EMSCRIPTEN)
 	  "-s ENVIRONMENT=web,worker,node"
 	  "-s USE_PTHREADS=0"
 	  "-s GL_UNSAFE_OPTS=0"
-	  "-s EXIT_RUNTIME=1"
+	  "-s NO_EXIT_RUNTIME=1"
 	)
 
     string(REPLACE ";" " " EMSCRIPTEN_LINKER_FLAGS_STR "${EMSCRIPTEN_LINKER_FLAGS}")
