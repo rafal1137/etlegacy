@@ -76,7 +76,7 @@ if(BUILD_CLIENT)
 		if(EMSCRIPTEN)
 		    message(STATUS "Building with Emscripten, using WebGL 1.0 (OpenGL ES 1.0)")
 		    # Link WebGL 1.0 flags for Emscripten
-		    target_link_libraries(renderer_gles_libraries INTERFACE "-sLEGACY_GL_EMULATION=1 -s GL_UNSAFE_OPTS=0 -s GL_FFP_ONLY=1)
+		    target_link_libraries(renderer_gles_libraries INTERFACE "-sLEGACY_GL_EMULATION=1 -s GL_UNSAFE_OPTS=0 -s GL_FFP_ONLY=1")
 		else()
 			find_package(GLES REQUIRED)
 			target_link_libraries(renderer_gles_libraries INTERFACE ${GLES_LIBRARY})
