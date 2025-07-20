@@ -58,7 +58,9 @@ if(EMSCRIPTEN)
 	  "-s GL_UNSAFE_OPTS=0"
 	  "-s INVOKE_RUN=0"
 	  "-s EXPORT_NAME='etl'"
-	  "-s LEGACY_GL_EMULATION=1"
+	  "-s USE_SDL=2"
+      "-s USE_WEBGL2=0"
+	  "-s FULL_ES2=0"
 	)
 
     string(REPLACE ";" " " EMSCRIPTEN_LINKER_FLAGS_STR "${EMSCRIPTEN_LINKER_FLAGS}")
