@@ -57,7 +57,7 @@ if(EMSCRIPTEN)
 	  "-s USE_PTHREADS=0"
 	  "-s GL_UNSAFE_OPTS=0"
 	  "-s INVOKE_RUN=0"
-	  "-s EXPORT_NAME="etl\""
+	  "-s EXPORT_NAME='etl'"
 	)
 
     string(REPLACE ";" " " EMSCRIPTEN_LINKER_FLAGS_STR "${EMSCRIPTEN_LINKER_FLAGS}")
