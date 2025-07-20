@@ -1018,11 +1018,7 @@ static int GLimp_SetMode(glconfig_t *glConfig, int mode, qboolean fullscreen, qb
 		if (flags & SDL_WINDOW_OPENGL && contextVersion > 0)
 		{
 			SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, major);
-#ifdef _EMSCRIPTEN__
-			SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, "0");
-#else
 			SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, minor);
-#endif
 
 			switch (contextVersion)
 			{
