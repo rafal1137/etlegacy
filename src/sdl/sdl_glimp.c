@@ -1034,11 +1034,7 @@ static int GLimp_SetMode(glconfig_t *glConfig, int mode, qboolean fullscreen, qb
 				break;
 			case GL_CONTEXT_EGL:
 				SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_ES);
-#ifdef __EMSCRIPTEN__
-				SDL_GL_SetAttribute(SDL_GL_CONTEXT_EGL, 0);
-#else
 				SDL_GL_SetAttribute(SDL_GL_CONTEXT_EGL, 1);
-#endif
 				break;
 			default:
 				break;
