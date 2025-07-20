@@ -57,6 +57,8 @@ if(EMSCRIPTEN)
 	  "-s USE_PTHREADS=0"
 	  "-s INVOKE_RUN=0"
 	  "-s EXPORT_NAME='etl'"
+      "-s SDL_EMSCRIPTEN_KEYBOARD_ELEMENT="#gameCanvas""
+	  "-s GL_DEBUG=1"
 	)
 
     string(REPLACE ";" " " EMSCRIPTEN_LINKER_FLAGS_STR "${EMSCRIPTEN_LINKER_FLAGS}")
