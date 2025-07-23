@@ -1017,6 +1017,7 @@ static int GLimp_SetMode(glconfig_t *glConfig, int mode, qboolean fullscreen, qb
 
 		if (flags & SDL_WINDOW_OPENGL && contextVersion > 0)
 		{
+#ifndef __EMSCRIPTEN__
 			SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, major);
 			SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, minor);
 
@@ -1039,6 +1040,10 @@ static int GLimp_SetMode(glconfig_t *glConfig, int mode, qboolean fullscreen, qb
 			default:
 				break;
 			}
+#else
+			SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+			SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 16);
+#endif
 		}
 
 		if ((SDL_glContext = SDL_GL_CreateContext(main_window)) == NULL)
