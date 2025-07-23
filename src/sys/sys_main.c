@@ -1261,6 +1261,15 @@ void Sys_SigHandler(int signal)
 	}
 }
 
+#ifdef __EMSCRIPTEN__
+// Wrapper function
+EMSCRIPTEN_KEEPALIVE void Com_Frame_Wrapper(void)
+{
+    Com_Frame();
+}
+#endif
+
+
 /**
  * @brief Sys_SetUpConsoleAndSignals
  */
@@ -1311,7 +1320,11 @@ static int Sys_GameLoop(void)
 
 		// Improve input responsiveness by moving sampling to other side of framerate limiter - moved to Com_Frame()
 		//IN_Frame();
+#ifndef __EMSCRIPTEN__
 		Com_Frame();
+#else
+		emscripten_set_main_loop(Com_Frame_Wrapper, 60, 1);
+#endif
 
 #ifdef ETLEGACY_DEBUG
 		endTime    = Sys_Milliseconds();
@@ -1339,15 +1352,6 @@ static int Sys_GameLoop(void)
 #endif /* __clang__ */
 	return return_code;
 }
-
-#ifdef __EMSCRIPTEN__
-// Wrapper function
-EMSCRIPTEN_KEEPALIVE void Sys_GameLoop_Wrapper(void)
-{
-    Sys_GameLoop();
-}
-#endif
-
 
 /**
  * @brief SDL_main
@@ -1477,10 +1481,5 @@ int main(int argc, char **argv)
 #endif
 
 #endif
-#ifndef __EMSCRIPTEN
 	return Sys_GameLoop();
-#else
-	emscripten_set_main_loop(Sys_GameLoop_Wrapper, 60, 1);
-	return 0;
-#endif
 }
