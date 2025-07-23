@@ -42,4 +42,8 @@ jobs:
           path: |
             build/etl*.js
             build/etl*.wasm
+            build/cgame*.wasm
+            build/ui*.wasm
+            build/qagame*.wasm
+            build/tvgame*.wasm
           if-no-files-found: error
