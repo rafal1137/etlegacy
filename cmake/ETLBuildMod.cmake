@@ -14,13 +14,15 @@ endif()
 # cgame
 #
 if(BUILD_CLIENT_MOD)
-	if(EMSCRIPTEN)
-		add_library(cgame STATIC ${CGAME_SRC})
-	else()
-		add_library(cgame MODULE ${CGAME_SRC})
-	endif()
+	add_library(cgame MODULE ${CGAME_SRC})
 	target_link_libraries(cgame cgame_libraries mod_libraries)
-
+	if(EMSCRIPTEN)
+		set_target_properties(cgame PROPERTIES
+			SUFFIX ".wasm"
+			OUTPUT_NAME "cgame"
+			LINK_FLAGS "-s EXPORTED_FUNCTIONS=['_vmMain']" # Adjust exported functions as needed
+		)
+	endif()
 	set_target_properties(cgame
 		PROPERTIES
 		PREFIX ""
@@ -37,13 +39,15 @@ endif()
 # ui
 #
 if(BUILD_CLIENT_MOD)
-	if(EMSCRIPTEN)
-		add_library(ui STATIC ${UI_SRC})
-	else()
-		add_library(ui MODULE ${UI_SRC})
-	endif()
+	add_library(ui MODULE ${UI_SRC})
 	target_link_libraries(ui ui_libraries mod_libraries)
-
+	if(EMSCRIPTEN)
+		set_target_properties(ui PROPERTIES
+			SUFFIX ".wasm"
+			OUTPUT_NAME "ui"
+			LINK_FLAGS "-s EXPORTED_FUNCTIONS=['_vmMain']" # Adjust exported functions as needed
+		)
+	endif()
 	set_target_properties(ui
 		PROPERTIES
 		PREFIX ""
@@ -60,13 +64,15 @@ endif()
 # qagame
 #
 if(BUILD_SERVER_MOD)
-	if(EMSCRIPTEN)
-		add_library(qagame STATIC ${QAGAME_SRC})
-	else()
-		add_library(qagame MODULE ${QAGAME_SRC})
-	endif()
+	add_library(qagame MODULE ${QAGAME_SRC})
 	target_link_libraries(qagame qagame_libraries mod_libraries)
-
+	if(EMSCRIPTEN)
+		set_target_properties(qagame PROPERTIES
+			SUFFIX ".wasm"
+			OUTPUT_NAME "qagame"
+			LINK_FLAGS "-s EXPORTED_FUNCTIONS=['_vmMain']" # Adjust exported functions as needed
+		)
+	endif()
 	if(FEATURE_LUASQL AND FEATURE_DBMS)
 		target_compile_definitions(qagame PRIVATE FEATURE_DBMS FEATURE_LUASQL)
 
@@ -109,13 +115,15 @@ endif()
 # tvgame
 #
 if(BUILD_SERVER_MOD)
-	if(EMSCRIPTEN)
-		add_library(tvgame STATIC ${TVGAME_SRC})
-	else()
-		add_library(tvgame MODULE ${TVGAME_SRC})
-	endif()
+	add_library(tvgame MODULE ${TVGAME_SRC})
 	target_link_libraries(tvgame tvgame_libraries mod_libraries)
-
+	if(EMSCRIPTEN)
+		set_target_properties(tvgame PROPERTIES
+			SUFFIX ".wasm"
+			OUTPUT_NAME "tvgame"
+			LINK_FLAGS "-s EXPORTED_FUNCTIONS=['_vmMain']" # Adjust exported functions as needed
+		)
+	endif()
 	if(FEATURE_LUASQL AND FEATURE_DBMS)
 		target_compile_definitions(tvgame PRIVATE FEATURE_DBMS FEATURE_LUASQL)
 
