@@ -191,7 +191,7 @@
 
 #define ARCH_STRING "js"
 
-#define DLL_EXT "wasm"
+#define DLL_EXT ".wasm"
 
 #define Q3_LITTLE_ENDIAN
 
