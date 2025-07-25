@@ -19,8 +19,6 @@ if(BUILD_CLIENT_MOD)
 	if(EMSCRIPTEN)
 		set_target_properties(cgame PROPERTIES
 			SUFFIX ".wasm"
-			OUTPUT_NAME "cgame"
-			LINK_FLAGS "-s EXPORTED_FUNCTIONS=['_vmMain']" # Adjust exported functions as needed
 		)
 	endif()
 	set_target_properties(cgame
@@ -44,8 +42,6 @@ if(BUILD_CLIENT_MOD)
 	if(EMSCRIPTEN)
 		set_target_properties(ui PROPERTIES
 			SUFFIX ".wasm"
-			OUTPUT_NAME "ui"
-			LINK_FLAGS "-s EXPORTED_FUNCTIONS=['_vmMain']" # Adjust exported functions as needed
 		)
 	endif()
 	set_target_properties(ui
@@ -69,8 +65,6 @@ if(BUILD_SERVER_MOD)
 	if(EMSCRIPTEN)
 		set_target_properties(qagame PROPERTIES
 			SUFFIX ".wasm"
-			OUTPUT_NAME "qagame"
-			LINK_FLAGS "-s EXPORTED_FUNCTIONS=['_vmMain']" # Adjust exported functions as needed
 		)
 	endif()
 	if(FEATURE_LUASQL AND FEATURE_DBMS)
@@ -120,8 +114,6 @@ if(BUILD_SERVER_MOD)
 	if(EMSCRIPTEN)
 		set_target_properties(tvgame PROPERTIES
 			SUFFIX ".wasm"
-			OUTPUT_NAME "tvgame"
-			LINK_FLAGS "-s EXPORTED_FUNCTIONS=['_vmMain']" # Adjust exported functions as needed
 		)
 	endif()
 	if(FEATURE_LUASQL AND FEATURE_DBMS)

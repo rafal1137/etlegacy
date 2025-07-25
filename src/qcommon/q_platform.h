@@ -189,9 +189,9 @@
 #define ID_INLINE
 #define PATH_SEP '/'
 
-#define ARCH_STRING ""
+#define ARCH_STRING "js"
 
-#define DLL_EXT ".js"
+#define DLL_EXT "wasm"
 
 #define Q3_LITTLE_ENDIAN
 
