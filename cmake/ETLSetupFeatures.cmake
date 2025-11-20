@@ -333,6 +333,122 @@ if(BUILD_MOD)
 		target_compile_definitions(mod_libraries INTERFACE FEATURE_PRESTIGE)
 	endif()
 
+	if(FEATURE_HW_BAN)
+		target_compile_definitions(mod_libraries INTERFACE HW_BAN)
+	endif()
+
+	if(FEATURE_USE_BODY_QUE)
+		target_compile_definitions(mod_libraries INTERFACE USE_BODY_QUE)
+	endif()
+
+	if(FEATURE_AUTO_GUID)
+		target_compile_definitions(mod_libraries INTERFACE AUTO_GUID)
+	endif()
+	
+	if(FEATURE_VISIBLE_TRIGGERS)
+		target_compile_definitions(mod_libraries INTERFACE VISIBLE_TRIGGERS)
+	endif()
+
+	if(FEATURE_GEN_FLAME_SHADER)
+		target_compile_definitions(mod_libraries INTERFACE GEN_FLAME_SHADER)
+	endif()
+
+	if(FEATURE_BLOOD_PARTICLE_TRAI)
+		target_compile_definitions(mod_libraries INTERFACE BLOOD_PARTICLE_TRAI)
+	endif()
+
+	if(FEATURE_SYSTEM_CHECK)
+		target_compile_definitions(mod_libraries INTERFACE SYSTEM_CHECK)
+	endif()
+
+	if(__SSYSTEM__)
+		target_compile_definitions(mod_libraries INTERFACE __SSYSTEM__)
+	endif()
+
+	if(FEATURE_FAKELAG)
+		target_compile_definitions(mod_libraries INTERFACE FAKEFLAGS)
+	endif()
+	
+	if(FEATURE_DEBUG_NQKEY)
+		target_compile_definitions(mod_libraries INTERFACE DEBUG_NQKEY)
+	endif()
+	
+	if(__SSYSTEM_WIP__)
+		target_compile_definitions(mod_libraries INTERFACE __SSYSTEM_WIP__)
+	endif()
+	
+	if(__SKIN_SYSTEM__)
+		target_compile_definitions(mod_libraries INTERFACE __SKIN_SYSTEM__)
+	endif()
+	
+	if(FEATURE_AUTHORIZE_SUPPORT)
+		target_compile_definitions(mod_libraries INTERFACE AUTHORIZE_SUPPORT)
+	endif()
+	
+	if(FEATURE_DBGANIMS)
+		target_compile_definitions(mod_libraries INTERFACE DBGANIMS)
+	endif()
+	
+	if(FEATURE_DBGANIMEVENTS)
+		target_compile_definitions(mod_libraries INTERFACE DBGANIMEVENTS)
+	endif()
+	
+	if(QAGAME)
+		target_compile_definitions(mod_libraries INTERFACE QAGAME)
+	endif()
+	
+	if(FEATURE_PROFILER)
+		target_compile_definitions(mod_libraries INTERFACE PROFILER)
+	endif()
+
+	if(FEATURE_NQ_USE_PROFILER) # Only Linux
+		target_compile_definitions(mod_libraries INTERFACE NQ_USE_PROFILER)
+	endif()
+
+	if(FEATURE_PRINTING_TO_CONSOLE_ALLOWED)
+		target_compile_definitions(mod_libraries INTERFACE PRINTING_TO_CONSOLE_ALLOWED)
+	endif()
+
+	if(FEATURE_BONE_HITTESTS)
+		target_compile_definitions(mod_libraries INTERFACE BONE_HITTESTS)
+	endif()
+	
+	if(FEATURE_CHEATS)
+		target_compile_definitions(mod_libraries INTERFACE CHEATS)
+	endif()
+	
+	if(PUNKBUSTER)
+		target_compile_definitions(mod_libraries INTERFACE PUNKBUSTER)
+	endif()
+	
+	if(FEATURE_NQ_TEST)
+		target_compile_definitions(mod_libraries INTERFACE NQ_TEST)
+	endif()
+	
+	if(__CLIENTCMD__)
+		target_compile_definitions(mod_libraries INTERFACE __CLIENTCMD__)
+	endif()
+	
+	if(FEATURE_RELAXED_FREE_ENTS)
+		target_compile_definitions(mod_libraries INTERFACE RELAXED_FREE_ENTS)
+	endif()
+	
+	if(FEATURE_JAQU_WIP)
+		target_compile_definitions(mod_libraries INTERFACE JAQU_WIP)
+	endif()
+	
+	if(FEATURE_LOCALIZATION_SUPPORT) 
+		target_compile_definitions(mod_libraries INTERFACE LOCALIZATION_SUPPORT)
+	endif()
+	
+	if(FEATURE_NEWWAY)
+		target_compile_definitions(mod_libraries INTERFACE NEWWAY)
+	endif()
+	
+	if(FEATURE_NOQUARTER)
+		target_compile_definitions(mod_libraries INTERFACE NOQUARTER)
+	endif()
+
 	if(FEATURE_LUA)
 		if(FEATURE_LUAJIT)
 			if(BUNDLED_LUA)
