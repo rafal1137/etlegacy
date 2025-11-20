@@ -315,6 +315,44 @@ extern vmCvar_t cg_scopeReticleDotThickness;
 
 extern vmCvar_t cg_commandMapTime;
 
+extern vmCvar_t cg_goatSound;
+extern vmCvar_t cg_HUDBackgroundColor;
+extern vmCvar_t cg_HUDBorderColor;
+extern vmCvar_t cg_HUDAlpha;
+extern vmCvar_t cg_drawKillSpree;
+extern vmCvar_t cg_drawCarryWeapons;
+extern vmCvar_t hud_powerupSize;		// iconSize in G_DrawActivePowerups()
+extern vmCvar_t hud_skillBarX;
+extern vmCvar_t hud_skillBarY;
+extern vmCvar_t hud_skillBarAlpha;
+extern vmCvar_t hud_rankX;
+extern vmCvar_t hud_rankY;
+extern vmCvar_t hud_rankAlpha;
+extern vmCvar_t hud_drawPowerups;
+extern vmCvar_t hud_drawAltHUD; // 0=vanilla, 1 = NQ style
+extern vmCvar_t cg_insanity;
+extern vmCvar_t cg_optimizePrediction;
+extern vmCvar_t cg_popupMessageFilter;
+extern vmCvar_t cg_weaponBounceSound;
+extern vmCvar_t cg_altHQVoice;
+extern vmCvar_t cg_rtcwShake;
+extern vmCvar_t cg_limbo_secondary;
+extern vmCvar_t cg_modelHilights;
+extern vmCvar_t cg_FTAutoSelect;
+extern vmCvar_t cg_drawAuraIcons;
+extern vmCvar_t cg_shoveSounds;
+extern vmCvar_t cg_pmWaitTime;
+extern vmCvar_t cg_pmFadeTime;
+extern vmCvar_t cg_pmPopupTime;
+extern vmCvar_t cg_pmBigPopupTime;
+extern vmCvar_t cg_spectator;
+extern vmCvar_t cg_whizzSounds; // bullets flying by (integer part = distance, fraction part = trace.fraction)
+extern vmCvar_t cg_favWeaponBank; // 0=previously used weapon.  banks: 1=knife, 2=pistol, 3=SMG, 4=grenade // lastUsedWeaponBank - get next weapon after using cretain weapon (like panzer,airstrike,satchel etc)
+extern vmCvar_t cg_spawnTimer_set;      // spawntimer from etpub
+extern vmCvar_t cg_spawnTimer_period;   // spawntimer from etpub
+extern vmCvar_t cg_skillOptions;
+
+
 void CG_RegisterCvars(void);
 
 #endif  // #ifndef INCLUDE_CG_CVARS_H

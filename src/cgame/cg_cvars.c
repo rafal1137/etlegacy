@@ -320,6 +320,43 @@ vmCvar_t cg_scopeReticleDotThickness;
 
 vmCvar_t cg_commandMapTime;
 
+vmCvar_t cg_goatSound;
+vmCvar_t cg_HUDBackgroundColor;
+vmCvar_t cg_HUDBorderColor;
+vmCvar_t cg_HUDAlpha;
+vmCvar_t cg_drawKillSpree;
+vmCvar_t cg_drawCarryWeapons;
+vmCvar_t hud_powerupSize;		// iconSize in G_DrawActivePowerups()
+vmCvar_t hud_skillBarX;
+vmCvar_t hud_skillBarY;
+vmCvar_t hud_skillBarAlpha;
+vmCvar_t hud_rankX;
+vmCvar_t hud_rankY;
+vmCvar_t hud_rankAlpha;
+vmCvar_t hud_drawPowerups;
+vmCvar_t hud_drawAltHUD; // 0=vanilla, 1 = NQ style
+vmCvar_t cg_insanity;
+vmCvar_t cg_optimizePrediction;
+vmCvar_t cg_popupMessageFilter;
+vmCvar_t cg_weaponBounceSound;
+vmCvar_t cg_altHQVoice;
+vmCvar_t cg_rtcwShake;
+vmCvar_t cg_limbo_secondary;
+vmCvar_t cg_modelHilights;
+vmCvar_t cg_FTAutoSelect;
+vmCvar_t cg_drawAuraIcons;
+vmCvar_t cg_shoveSounds;
+vmCvar_t cg_pmWaitTime;
+vmCvar_t cg_pmFadeTime;
+vmCvar_t cg_pmPopupTime;
+vmCvar_t cg_pmBigPopupTime;
+vmCvar_t cg_spectator;
+vmCvar_t cg_whizzSounds; // bullets flying by (integer part = distance, fraction part = trace.fraction)
+vmCvar_t cg_favWeaponBank; // 0=previously used weapon.  banks: 1=knife, 2=pistol, 3=SMG, 4=grenade // lastUsedWeaponBank - get next weapon after using cretain weapon (like panzer,airstrike,satchel etc)
+vmCvar_t cg_spawnTimer_set;      // spawntimer from etpub
+vmCvar_t cg_spawnTimer_period;   // spawntimer from etpub
+vmCvar_t cg_skillOptions;
+
 typedef struct
 {
 	vmCvar_t *vmCvar;
@@ -624,6 +661,42 @@ static cvarTable_t cvarTable[] =
 	{ &cg_scopeReticleDotThickness,           "cg_scopeReticleDotThickness",           "2.0",         CVAR_ARCHIVE,                 0 },
 
 	{ &cg_commandMapTime,                     "cg_commandMapTime",                     "0",           CVAR_ARCHIVE,                 0 },
+
+	{ &cg_goatSound,                          "cg_goatSound",                          "3",           CVAR_ARCHIVE,                 0 },
+	{ &cg_HUDBackgroundColor,                 "cg_HUDBackgroundColor",                 ".16 .2 .17",  CVAR_ARCHIVE,                 0 },
+	{ &cg_HUDBorderColor,                     "cg_HUDBorderColor",                     ".5  .5 .5",   CVAR_ARCHIVE,                 0 },
+	{ &cg_HUDAlpha,                           "cg_HUDAlpha",                           "0.8",         CVAR_ARCHIVE,                 0 },
+	{ &cg_drawKillSpree,                      "cg_drawKillSpree",                      "2",           CVAR_ARCHIVE,                 0 },
+	{ &cg_drawCarryWeapons,                   "cg_drawCarryWeapons",                   "0",           CVAR_ARCHIVE,                 0 },
+	{ &hud_powerupSize,                       "hud_powerupSize",                       "18",          CVAR_ARCHIVE,                 0 },
+	{ &hud_skillBarX,                         "hud_skillBarX",                         "44",          CVAR_ARCHIVE,                 0 },
+	{ &hud_skillBarY,                         "hud_skillBarY",                         "388",         CVAR_ARCHIVE,                 0 },
+	{ &hud_skillBarAlpha,                     "hud_skillBarAlpha",                     "1.0",         CVAR_ARCHIVE,                 0 },
+	{ &hud_rankX,                             "hud_rankX",                             "112",         CVAR_ARCHIVE,                 0 },
+	{ &hud_rankY,                             "hud_rankY",                             "408",         CVAR_ARCHIVE,                 0 },
+	{ &hud_rankAlpha,                         "hud_rankAlpha",                         "1.0",         CVAR_ARCHIVE,                 0 },
+	{ &hud_drawPowerups,                      "hud_drawPowerups",                      "1",           CVAR_ARCHIVE,                 0 },
+	{ &hud_drawAltHUD,                        "hud_drawAltHUD",                        "1",           CVAR_ARCHIVE,                 0 },
+	{ &cg_insanity,                           "",                                      "0",           CVAR_ARCHIVE,                 0 },
+	{ &cg_optimizePrediction,                 "cg_optimizePrediction",                 "1",           CVAR_ARCHIVE,                 0 },
+	{ &cg_popupMessageFilter,                 "cg_popupMessageFilter",                 "0",           CVAR_ARCHIVE,                 0 },
+	{ &cg_weaponBounceSound,                  "cg_weaponBounceSound",                  "1",           CVAR_ARCHIVE,                 0 },
+	{ &cg_altHQVoice,                         "cg_altHQVoice",                         "0",           CVAR_ARCHIVE,                 0 },
+	{ &cg_rtcwShake,                          "cg_rtcwShake",                          "0",           CVAR_ARCHIVE,                 0 },
+	{ &cg_limbo_secondary,                    "cg_limbo_secondary",                    "2",           CVAR_ARCHIVE,                 0 },
+	{ &cg_modelHilights,                      "cg_modelHilights",                      "1",           CVAR_ARCHIVE,                 0 },
+	{ &cg_FTAutoSelect,                       "cg_FTAutoSelect",                       "1",           CVAR_ARCHIVE,                 0 },
+	{ &cg_drawAuraIcons,                      "cg_drawAuraIcons",                      "1",           CVAR_ARCHIVE,                 0 },
+	{ &cg_shoveSounds,                        "cg_shoveSounds",                        "1",           CVAR_ARCHIVE,                 0 },
+	{ &cg_pmWaitTime,                         "cg_pmWaitTime",                         "2",           CVAR_ARCHIVE,                 0 },
+	{ &cg_pmFadeTime,                         "cg_pmFadeTime",                         "2.5",         CVAR_ARCHIVE,                 0 },
+	{ &cg_pmPopupTime,                        "cg_pmPopupTime",                        "1",           CVAR_ARCHIVE,                 0 },
+	{ &cg_spectator,                          "cg_spectator",                          "3",           CVAR_ARCHIVE,                 0 },
+	{ &cg_whizzSounds,                        "cg_whizzSounds",                        "1",           CVAR_ARCHIVE,                 0 },
+	{ &cg_favWeaponBank,                      "cg_favWeaponBank",                      "0",           CVAR_ARCHIVE,                 0 },
+	{ &cg_spawnTimer_set,                     "cg_spawnTimer_set",                     "-1",          CVAR_ARCHIVE,                 0 },
+	{ &cg_spawnTimer_period,                  "cg_spawnTimer_period",                  "0",           CVAR_ARCHIVE,                 0 },
+	{ &cg_skillOptions,                       "cg_skillOptions",                       "31",          CVAR_ARCHIVE,                 0 },
 };
 
 static const unsigned int cvarTableSize = sizeof(cvarTable) / sizeof(cvarTable[0]);
