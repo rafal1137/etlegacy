@@ -320,6 +320,81 @@ extern vmCvar_t g_floodWait;
 
 extern vmCvar_t g_etltv_flags;
 
+extern vmCvar_t nq_War;
+extern vmCvar_t	g_asblock;
+extern vmCvar_t g_shrubbot;
+extern vmCvar_t g_playDead;
+extern vmCvar_t	g_dragCorpse;
+extern vmCvar_t	g_classChange;
+extern vmCvar_t	g_privateMessages;
+extern vmCvar_t	g_XPSave;
+extern vmCvar_t	g_XPSaveDirectory;
+extern vmCvar_t	g_XPSaveMaxAge;
+extern vmCvar_t	g_weapons; // see WPF_ defines
+extern vmCvar_t	g_goomba;
+extern vmCvar_t	g_weaponItems;
+extern vmCvar_t g_serverInfo; // see SIF_ defines
+extern vmCvar_t g_goombaFlags; // see GBF_ defines
+extern vmCvar_t g_tyranny;
+extern vmCvar_t g_ForceCvarFile;
+extern vmCvar_t g_fear;
+extern vmCvar_t g_shortcuts;
+extern vmCvar_t g_XPDecay; // see XPDF_ defines
+extern vmCvar_t g_XPDecayRate;
+extern vmCvar_t g_XPDecayFloor;
+extern vmCvar_t g_maxXP;
+extern vmCvar_t g_censor;
+extern vmCvar_t g_censorNames;
+extern vmCvar_t g_censorPenalty;
+extern vmCvar_t g_censorMuteTime;
+extern vmCvar_t	g_truePing;
+extern vmCvar_t g_slashKill;
+extern vmCvar_t g_teamDamageRestriction;
+extern vmCvar_t g_minHits;
+extern vmCvar_t g_autoTempBan;
+extern vmCvar_t g_autoTempBanTime;
+extern vmCvar_t g_medics;
+extern vmCvar_t g_msgs;
+extern vmCvar_t g_msgpos;
+extern vmCvar_t g_constructiblexpsharing;
+extern vmCvar_t g_doubleJump;			// allow double jump
+extern vmCvar_t g_doubleJumpHeight;
+extern vmCvar_t jp_falloff;
+extern vmCvar_t jp_insanity;			// bitmask for Insanity Mode
+extern vmCvar_t jp_keepAwards;			// bitmask for keeping award powerups between classes
+extern vmCvar_t jp_drawBB;				// bitmask for drawing bounding boxes around entities
+extern vmCvar_t g_weaponBounce;			// Bounciness of dropped weapons
+extern vmCvar_t g_throwDistance;		// distance items are thrown (health packs, weapons, etc)
+extern vmCvar_t g_missileSpeed;			// speed of rockets (0 = default speed, or 2500)
+extern vmCvar_t g_missileHealth;		// health of missiles, grenades, etc. if 0 then non damageable (default : 5)
+extern vmCvar_t g_mortarBBox;
+extern vmCvar_t g_announcer;
+extern vmCvar_t g_headshot;
+extern vmCvar_t g_multikillTime;
+extern vmCvar_t g_bulletReflect;
+extern vmCvar_t g_canisterKick;
+extern vmCvar_t g_canisterKickOwner;
+extern vmCvar_t g_spectator;
+extern vmCvar_t g_realism;
+extern vmCvar_t g_weaponScriptsDir;
+extern vmCvar_t g_fastBackStab;
+extern vmCvar_t g_missileGravity;
+extern vmCvar_t g_customChat;
+extern vmCvar_t g_adrenaline;
+extern vmCvar_t g_simpleBullets;
+extern vmCvar_t	g_csMethod;
+extern vmCvar_t csMethod;
+extern vmCvar_t g_csStrings;
+extern vmCvar_t g_unlockWeapons;
+extern vmCvar_t g_killerLockTime;
+extern vmCvar_t	nq_scriptMode;
+extern vmCvar_t nq_playerspawning;
+extern vmCvar_t nq_noq;
+extern vmCvar_t nq_security; // controls different security related settings
+extern vmCvar_t g_skipCorrection;
+extern vmCvar_t g_ammoCabinetTime;
+extern vmCvar_t g_healthCabinetTime;
+
 void G_RegisterCvars(void);
 
 #endif  // #ifndef INCLUDE_G_CVARS_H

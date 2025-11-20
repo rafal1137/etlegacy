@@ -2173,3 +2173,32 @@ qboolean CG_ParseMapVotePlayersCountConfig(void)
 
 	return qtrue;
 }
+
+gentity_t *G_FindByClassnameFast(gentity_t *from, const char *match, int hash)
+{
+	gentity_t* max = &g_entities[level.num_entities];
+
+	if (!from)
+	{
+		from = g_entities;
+	}
+	else
+	{
+		from++;
+	}
+
+	for (; from < max; from++)
+	{
+		if (!from->inuse)
+		{
+			continue;
+		}
+
+		if (from->classnamehash == hash && !Q_stricmp(from->classname, match))
+		{
+			return from;
+		}
+	}
+
+	return NULL;
+}

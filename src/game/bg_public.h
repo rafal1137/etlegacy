@@ -3355,4 +3355,39 @@ typedef struct client_vote_s
 #define CREATE_HASH                         76308
 #define DELETE_HASH                         76202
 
+#define WARMODE_ENABLE			0x0001	// 1		- war mode: spawn with a few possible weapons, but plenty ammo..
+
+#define	SECONDS_5			5000
+
+typedef struct {
+	qboolean	restricted;		// A Weapon is definately not avialable == true if there is some kind of restriction for the weapon.
+	qboolean	disabled;		// ==true if the weapon is so much restricted that in effect it's disabled.
+	int			minplayers;		// The weapon is only available if there are at least 'minplayers' players.
+	int			maxweap;		// A maximum of 'maxweap' weapons is available.
+	int			percentage;		// The weapon is available for 'percentage' percent of the players.
+	qboolean	r_minplayers;	// ==true if the weapon is restricted on minplayers
+	qboolean	r_maxweap;		// ==true if the weapon is restricted on maxweap
+	qboolean	r_percentage;	// ==true if the weapon is restricted on percentage
+} weapon_restriction_t;
+
+weapon_restriction_t weapon_restrictions[WP_NUM_WEAPONS];
+
+#define PLAYER_HASH						79346	//BG_StringHashValue( "player" );
+#define MISC_MG42_HASH					102542	//BG_StringHashValue( "misc_mg42" );
+#define DYNAMITE_HASH					105217	//BG_StringHashValue( "dynamite" );
+#define LANDMINE_HASH					102905	//BG_StringHashValue( "landmine" );
+#define SATCHEL_CHARGE_HASH				182268	//BG_StringHashValue( "satchel_charge" );
+#define SMOKE_BOMB_HASH					130076	//BG_StringHashValue( "smoke_bomb" );
+#define AIR_STRIKE_HASH					124367	//BG_StringHashValue( "air strike" );
+#define SCRIPT_MOVER_HASH				162988	//BG_StringHashValue( "script_mover" );
+#define CORPSE_HASH						79228	//BG_StringHashValue( "corpse" );
+#define GRENADE_HASH					88534	//BG_StringHashValue( "grenade" );
+#define ROCKET_HASH						78726	//BG_StringHashValue( "rocket" );
+#define MORTAR_GRENADE_HASH				185795	//BG_StringHashValue( "mortar_grenade" );
+#define FLAMECHUNK_HASH					130240	//BG_StringHashValue( "flamechunk" );
+#define GPG40_GRENADE_HASH				155078	//BG_StringHashValue( "gpg40_grenade" );
+#define M7_GRENADE_HASH					121778	//BG_StringHashValue( "m7_grenade" );
+#define MISC_CABINET_HEALTH_HASH		252730	//BG_StringHashValue( "misc_cabinet_health" );
+#define MISC_CABINET_SUPPLY_HASH		260101	//BG_StringHashValue( "misc_cabinet_supply" );
+
 #endif // #ifndef INCLUDE_BG_PUBLIC_H

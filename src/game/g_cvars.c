@@ -340,6 +340,84 @@ vmCvar_t g_floodWait;
 
 vmCvar_t g_etltv_flags;
 
+vmCvar_t nq_War;
+vmCvar_t g_asblock;
+vmCvar_t g_shrubbot;
+vmCvar_t g_playDead;
+vmCvar_t g_shove;
+vmCvar_t g_dragCorpse;
+vmCvar_t g_classChange;
+vmCvar_t g_privateMessages;
+vmCvar_t g_XPSave;
+vmCvar_t g_XPSaveDirectory;
+vmCvar_t g_XPSaveMaxAge;
+vmCvar_t g_weapons; // see WPF_ defines
+vmCvar_t g_goomba;
+vmCvar_t g_weaponItems;
+vmCvar_t g_serverInfo; // see SIF_ defines
+vmCvar_t g_goombaFlags; // see GBF_ defines
+vmCvar_t g_tyranny;
+vmCvar_t g_ForceCvarFile;
+vmCvar_t g_campaignFile;
+vmCvar_t g_fear;
+vmCvar_t g_shortcuts;
+vmCvar_t g_XPDecay; // see XPDF_ defines
+vmCvar_t g_XPDecayRate;
+vmCvar_t g_XPDecayFloor;
+vmCvar_t g_maxXP;
+vmCvar_t g_censor;
+vmCvar_t g_censorNames;
+vmCvar_t g_censorPenalty;
+vmCvar_t g_censorMuteTime;
+vmCvar_t g_truePing;
+vmCvar_t g_slashKill;
+vmCvar_t g_teamDamageRestriction;
+vmCvar_t g_minHits;
+vmCvar_t g_autoTempBan;
+vmCvar_t g_autoTempBanTime;
+vmCvar_t g_medics;
+vmCvar_t g_msgs;
+vmCvar_t g_msgpos;
+vmCvar_t g_constructiblexpsharing;
+vmCvar_t g_doubleJump;			// allow double jump
+vmCvar_t g_doubleJumpHeight;
+vmCvar_t jp_falloff;
+vmCvar_t jp_insanity;			// bitmask for Insanity Mode
+vmCvar_t jp_keepAwards;			// bitmask for keeping award powerups between classes
+vmCvar_t jp_drawBB;				// bitmask for drawing bounding boxes around entities
+vmCvar_t g_weaponBounce;			// Bounciness of dropped weapons
+vmCvar_t g_throwDistance;		// distance items are thrown (health packs, weapons, etc)
+vmCvar_t g_realHead;				// b_realHead functionality from ETPro
+vmCvar_t g_missileSpeed;			// speed of rockets (0 = default speed, or 2500)
+vmCvar_t g_missileHealth;		// health of missiles, grenades, etc. if 0 then non damageable (default : 5)
+vmCvar_t g_mortarBBox;
+vmCvar_t g_announcer;
+vmCvar_t g_headshot;
+vmCvar_t g_multikillTime;
+vmCvar_t g_bulletReflect;
+vmCvar_t g_canisterKick;
+vmCvar_t g_canisterKickOwner;
+vmCvar_t g_spectator;
+vmCvar_t g_realism;
+vmCvar_t g_weaponScriptsDir;
+vmCvar_t g_fastBackStab;
+vmCvar_t g_missileGravity;
+vmCvar_t g_customChat;
+vmCvar_t g_adrenaline;
+vmCvar_t g_simpleBullets;
+vmCvar_t g_csMethod;
+vmCvar_t csMethod;
+vmCvar_t g_csStrings;
+vmCvar_t g_unlockWeapons;
+vmCvar_t g_killerLockTime;
+vmCvar_t nq_scriptMode;
+vmCvar_t nq_playerspawning;
+vmCvar_t nq_noq;
+vmCvar_t nq_security; // controls different security related settings
+vmCvar_t g_skipCorrection;
+vmCvar_t g_ammoCabinetTime;
+vmCvar_t g_healthCabinetTime;
+
 // Table {{{1
 
 typedef struct
@@ -656,6 +734,79 @@ cvarTable_t gameCvarTable[] =
 	{ &g_floodWait,                       "g_floodWait",                       "1000",                       CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
 
 	{ &g_etltv_flags,                     "g_etltv_flags",                     "3",                          CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+
+	{ &nq_War,                            "nq_War",                            "0",                          CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_asblock,                         "g_asblock",                         "0",                          CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_shrubbot,                        "g_shrubbot",                        "shrubbot.cfg",               CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_playDead,                        "g_playDead",                        "0",                          CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_dragCorpse,                      "g_dragCorpse",                      "1",                          CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_classChange,                     "g_classChange",                     "0",                          CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_privateMessages,                 "g_privateMessages",                 "3",                          CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_XPSave,                          "g_XPSave",                          "0",                          CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_XPSaveDirectory,                 "g_XPSaveDirectory",                 "",                           CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_XPSaveMaxAge,                    "g_XPSaveMaxAge",                    "86400",                      CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_weapons,                         "g_weapons",                         "0",                          CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_goomba,                          "g_goomba",                          "10",                         CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_weaponItems,                     "g_weaponItems",                     "1",                          CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_goombaFlags,                     "g_goombaFlags",                     "25",                         CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_tyranny,                         "g_tyranny",                         "1",                          CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_ForceCvarFile,                   "g_ForceCvarFile",                   "",                           CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_fear,                            "g_fear",                            "2000",                       CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_shortcuts,                       "g_shortcuts",                       "0",                          CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_XPDecay,                         "g_XPDecay",                         "0",                          CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_XPDecayRate,                     "g_XPDecayRate",                     "0.0",                        CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_XPDecayFloor,                    "g_XPDecayFloor",                    "0",                          CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_maxXP,                           "g_maxXP",                           "-1",                         CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_censor,                          "g_censor",                          "",                           CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_censorNames,                     "g_censorNames",                     "",                           CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_censorPenalty,                   "g_censorPenalty",                   "1",                          CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_censorMuteTime,                  "g_censorMuteTime",                  "0",                          CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_truePing,                        "g_truePing",                        "0",                          CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_slashKill,                       "g_slashKill",                       "0",                          CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_teamDamageRestriction,           "g_teamDamageRestriction",           "0",                          CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_minHits,                         "g_minHits",                         "6",                          CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_autoTempBan,                     "g_autoTempBan",                     "0",                          CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_autoTempBanTime,                 "g_autoTempBanTime",                 "1800",                       CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_medics,                          "g_medics",                          "65",                         CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_msgs,                            "g_msgs",                            "0",                          CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_msgpos,                          "g_msgpos",                          "0",                          CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_constructiblexpsharing,          "g_constructiblexpsharing",          "0",                          CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_doubleJump,                      "g_doubleJump",                      "0",                          CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_doubleJumpHeight,                "g_doubleJumpHeight",                "1.4",                        CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &jp_falloff,                        "jp_falloff",                        "1",                          CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &jp_insanity,                       "jp_insanity",                       "0",                          CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &jp_keepAwards,                     "g_skills",                          "0",                          CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_weaponBounce,                    "g_weaponBounce",                    "0.25",                       CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_throwDistance,                   "g_throwDistance",                   "75",                         CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_missileSpeed,                    "g_missileSpeed",                    "0",                          CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_missileHealth,                   "g_missileHealth",                   "5",                          CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_mortarBBox,                      "g_mortarBBox",                      "0",                          CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_announcer,                       "g_announcer",                       "127",                        CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_headshot,                        "g_headshot",                        "0",                          CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_multikillTime,                   "g_multikillTime",                   "1000",                       CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_bulletReflect,                   "g_bulletReflect",                   "0",                          CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_canisterKick,                    "g_canisterKick",                    "0",                          CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_canisterKickOwner,               "g_canisterKickOwner",               "0",                          CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_spectator,                       "g_spectator",                       "0",                          CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_realism,                         "g_realism",                         "96",                         CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_weaponScriptsDir,                "g_weaponScriptsDir",                "",                           CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_fastBackStab,                    "g_fastBackStab",                    "0",                          CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_missileGravity,                  "g_missileGravity",                  "0",                          CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_customChat,                      "g_customChat",                      "1",                          CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_adrenaline,                      "g_adrenaline",                      "0",                          CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_simpleBullets,                   "g_simpleBullets",                   "0",                          CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_csMethod,                        "g_csMethod",                        "0",                          CVAR_ARCHIVE | CVAR_NORESTART | CVAR_LATCH,      0, qtrue,  qfalse },
+	{ &csMethod,                          "csMethod",                          "0",                          CVAR_ROM | CVAR_NORESTART,                       0, qtrue,  qfalse },
+	{ &g_csStrings,                       "g_csStrings",                       "3",                          CVAR_ARCHIVE | CVAR_NORESTART,                   0, qtrue,  qfalse },
+	{ &g_unlockWeapons,                   "g_unlockWeapons",                   "0",                          CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_killerLockTime,                  "g_killerLockTime",                  "0",                          CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &nq_scriptMode,                     "nq_scriptMode",                     "3",                          CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &nq_playerspawning,                 "nq_playerspawning",                 "0",                          CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &nq_noq,                            "nq_noq",                            "0",                          CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &nq_security,                       "nq_security",                       "0",                          CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_skipCorrection,                  "g_skipCorrection",                  "1",                          CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_ammoCabinetTime,                 "g_ammoCabinetTime",                 "60000",                      CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
+	{ &g_healthCabinetTime,               "g_healthCabinetTime",               "10000",                      CVAR_ARCHIVE,                                    0, qtrue,  qfalse },
 };
 
 /**

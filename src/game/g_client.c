@@ -3155,7 +3155,7 @@ void ClientSpawn(gentity_t *ent, qboolean revived, qboolean teamChange, qboolean
 
 		client->sess.playerType = client->sess.latchPlayerType;
 
-		if (G_IsWeaponDisabled(ent, client->sess.latchPlayerWeapon))
+		if (G_IsWeaponDisabled(ent, client->sess.latchPlayerWeapon, qfalse))
 		{
 			bg_playerclass_t *classInfo;
 
@@ -3171,7 +3171,7 @@ void ClientSpawn(gentity_t *ent, qboolean revived, qboolean teamChange, qboolean
 			update                    = qtrue;
 		}
 
-		if (G_IsWeaponDisabled(ent, client->sess.playerWeapon))
+		if (G_IsWeaponDisabled(ent, client->sess.playerWeapon, qfalse))
 		{
 			bg_playerclass_t *classInfo;
 

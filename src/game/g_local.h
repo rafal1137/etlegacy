@@ -552,6 +552,8 @@ struct gentity_s
 #endif
 
 	int lastSurfaceFlags;
+
+	int classnamehash;                  /// core: for faster classname comparison..
 };
 
 /**
@@ -1545,7 +1547,7 @@ int G_CharacterIndex(const char *name);
 int G_StringIndex(const char *string);
 qboolean G_AllowTeamsAllowed(gentity_t *ent, gentity_t *activator);
 void G_UseEntity(gentity_t *ent, gentity_t *other, gentity_t *activator);
-qboolean G_IsWeaponDisabled(gentity_t *ent, weapon_t weapon);
+qboolean G_IsWeaponDisabled(gentity_t* ent, weapon_t weapon, qboolean quiet);
 void G_TeamCommand(team_t team, const char *cmd);
 
 gentity_t *G_Find(gentity_t *from, size_t fieldofs, const char *match);
@@ -2738,5 +2740,7 @@ typedef struct consoleCommandTable_s
 } consoleCommandTable_t;
 
 extern const char *gameNames[];
+
+gentity_t *G_FindByClassnameFast(gentity_t *from, const char* match, int hash);
 
 #endif // #ifndef INCLUDE_G_LOCAL_H

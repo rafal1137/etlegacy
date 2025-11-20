@@ -426,7 +426,7 @@ qboolean G_CanPickupWeapon(weapon_t weapon, gentity_t *ent)
 	}
 
 	// single weapon restrictions
-	if (G_IsWeaponDisabled(ent, weapon))
+	if (G_IsWeaponDisabled(ent, weapon, qfalse))
 	{
 		return qfalse;
 	}

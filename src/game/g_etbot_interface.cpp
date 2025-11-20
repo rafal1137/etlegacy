@@ -2037,11 +2037,11 @@ public:
 #ifdef NOQUARTER
 			if (G_IsWeaponDisabled(bot, (weapon_t)bot->client->sess.latchPlayerWeapon, qtrue))
 			{
-				bot->client->sess.latchPlayerWeapon = 0;
+				bot->client->sess.latchPlayerWeapon = WP_NONE;
 			}
 			if (G_IsWeaponDisabled(bot, (weapon_t)bot->client->sess.latchPlayerWeapon2, qtrue))
 			{
-				bot->client->sess.latchPlayerWeapon2 = 0;
+				bot->client->sess.latchPlayerWeapon2 = WP_NONE;
 			}
 #elif defined(ETPUB_VERSION)
 			if (G_IsWeaponDisabled(bot, (weapon_t)bot->client->sess.latchPlayerWeapon, bot->client->sess.sessionTeam, qtrue))
@@ -2213,11 +2213,11 @@ public:
 #ifdef NOQUARTER
 			if (G_IsWeaponDisabled(bot, (weapon_t)bot->client->sess.latchPlayerWeapon, qtrue))
 			{
-				bot->client->sess.latchPlayerWeapon = 0;
+				bot->client->sess.latchPlayerWeapon = WP_NONE;
 			}
 			if (G_IsWeaponDisabled(bot, (weapon_t)bot->client->sess.latchPlayerWeapon2, qtrue))
 			{
-				bot->client->sess.latchPlayerWeapon2 = 0;
+				bot->client->sess.latchPlayerWeapon2 = WP_NONE;
 			}
 #elif defined(ETPUB_VERSION)
 			if (G_IsWeaponDisabled(bot, (weapon_t)bot->client->sess.latchPlayerWeapon, bot->client->sess.sessionTeam, qtrue))
@@ -3920,7 +3920,7 @@ public:
 		{
 			int iWeapon = bot->client->ps.weapon;
 #ifdef NOQUARTER
-			_curclip = bot->client->ps.ammoclip[WeaponTable[(weapon_t)iWeapon].clipindex];
+			_curclip = bot->client->ps.ammoclip[GetWeaponTableData(iWeapon)->clipIndex];
 #else
 			_curclip = bot->client->ps.ammoclip[GetWeaponTableData(iWeapon)->clipIndex];
 #endif

@@ -1920,6 +1920,33 @@ int G_TeamCount(gentity_t *ent, int weap)
 	return cnt;
 }
 
+int G_WeaponCount(gentity_t *ent, weapon_t weap)
+{
+	int i, j, cnt = 0;
+
+	for (i = 0; i < level.numConnectedClients; ++i)
+	{
+		j = level.sortedClients[i];
+
+		if (j == ent - g_entities)
+		{
+			continue;
+		}
+
+		if (!(level.clients[j].sess.sessionTeam == TEAM_AXIS || level.clients[j].sess.sessionTeam == TEAM_ALLIES))
+		{
+			continue;
+		}
+
+		if (level.clients[j].sess.playerWeapon == weap || level.clients[j].sess.latchPlayerWeapon == weap ||
+			level.clients[j].sess.playerWeapon == GetWeaponTableData(weap)->weapAlts || level.clients[j].sess.latchPlayerWeapon == GetWeaponTableData(weap)->weapAlts)
+		{
+			++cnt;
+		}
+	}
+	return cnt;
+}
+
 /**
  * @brief Checks for heavy and rifle weapons restriction
  *
@@ -1930,89 +1957,83 @@ int G_TeamCount(gentity_t *ent, int weap)
  * @todo This function needs some rework: count picked up opposite team weapons too
  *       see CG_LimboPanel_RealWeaponIsDisabled
  */
-qboolean G_IsWeaponDisabled(gentity_t *ent, weapon_t weapon)
+qboolean G_IsWeaponDisabled(gentity_t* ent, weapon_t weapon, qboolean quiet)
 {
-	int        playerCount, weaponCount, maxCount = -1;
-	const char *weaponString = "";
+	int wcount;
 
-	// allow selecting weapons as spectator for bots (to avoid endless loops in pfnChangeTeam())
+	// core: no restrictions during war mode.. // IRATA: does the client knows this ?
+	if (nq_War.integer & WARMODE_ENABLE)
+	{
+		return qfalse;
+	}
+
+	// redeye - allow selecting weapons as spectator for bots (to avoid endless loops in pfnChangeTeam())
 	if (ent->client->sess.sessionTeam == TEAM_SPECTATOR && !(ent->r.svFlags & SVF_BOT))
 	{
 		return qtrue;
 	}
 
-	if (!(GetWeaponTableData(weapon)->skillBased == SK_HEAVY_WEAPONS || (GetWeaponTableData(weapon)->type & WEAPON_TYPE_RIFLENADE)
-	      || (GetWeaponTableData(GetWeaponTableData(weapon)->weapAlts)->type & WEAPON_TYPE_RIFLENADE)))
+	// give some some time at start so players do no lose weapons they have because of restrictions
+	if (ent->client->sess.playerWeapon == weapon && ((level.time - level.startTime) < SECONDS_5))
 	{
 		return qfalse;
 	}
 
-	playerCount = G_TeamCount(ent, -1);
-	weaponCount = G_TeamCount(ent, weapon);
-
-	// total percentage restriction
-	if (GetWeaponTableData(weapon)->skillBased == SK_HEAVY_WEAPONS && weaponCount >= ceil(playerCount * g_heavyWeaponRestriction.integer * 0.01))
-	{
-		return qtrue;
-	}
-
-	// single weapon restrictions
-	if (GetWeaponTableData(weapon)->type & WEAPON_TYPE_PANZER)
-	{
-		maxCount     = team_maxRockets.integer;
-		weaponString = team_maxRockets.string;
-	}
-	else if (GetWeaponTableData(weapon)->type & WEAPON_TYPE_MG)
-	{
-		maxCount     = team_maxMachineguns.integer;
-		weaponString = team_maxMachineguns.string;
-	}
-	else if (GetWeaponTableData(weapon)->type & WEAPON_TYPE_MORTAR)
-	{
-		maxCount     = team_maxMortars.integer;
-		weaponString = team_maxMortars.string;
-	}
-	else if ((GetWeaponTableData(weapon)->type & WEAPON_TYPE_RIFLENADE)
-	         || (GetWeaponTableData(GetWeaponTableData(weapon)->weapAlts)->type & WEAPON_TYPE_RIFLENADE))
-	{
-		maxCount     = team_maxRiflegrenades.integer;
-		weaponString = team_maxRiflegrenades.string;
-	}
-	else if (weapon == WP_FLAMETHROWER)
-	{
-		maxCount     = team_maxFlamers.integer;
-		weaponString = team_maxFlamers.string;
-	}
-
-	if (maxCount == -1)
+	// if the weapon is not restricted, then we're done.. // IRATA: are we ???! what about weapon_restrictions[weapon].disabled?
+	if (!weapon_restrictions[weapon].restricted)
 	{
 		return qfalse;
 	}
 
-	if (strstr(weaponString, "%-"))
+	// if the weapon is disabled, then we're done..
+	if (weapon_restrictions[weapon].disabled)
 	{
-		maxCount = floor(maxCount * playerCount * 0.01);
-	}
-	else if (strstr(weaponString, "%"))
-	{
-		maxCount = ceil(maxCount * playerCount * 0.01);
-	}
-
-	if (GetWeaponTableData(weapon)->weapAlts)
-	{
-		// add basic weapons
-		weaponCount += G_TeamCount(ent, GetWeaponTableData(weapon)->weapAlts);
-	}
-
-	if (weaponCount >= maxCount)
-	{
-		if (ent->client->ps.pm_flags & PMF_LIMBO)
+		// onscreen message..
+		if (!quiet && !(ent->client->ps.pm_flags & PMF_LIMBO))
 		{
-			CP(va("cp \"^1*^3 %s not available!^1 *\" 1", GetWeaponTableData(weapon)->desc));
+			CP(va("cp \"^1* ^3%s is disabled by admin. ^1*^7\" 1", GetWeaponTableData(weapon)->desc));
 		}
 		return qtrue;
 	}
 
+	// are there enough players to activate the weapon?..
+	if (weapon_restrictions[weapon].r_minplayers && level.numPlayingClients < weapon_restrictions[weapon].minplayers)
+	{
+		// onscreen message..
+		if (!quiet && !(ent->client->ps.pm_flags & PMF_LIMBO))
+		{
+			CP(va("cp \"^1* ^3%s restricted. Low player count. ^1*^7\" 1", GetWeaponTableData(weapon)->desc));
+		}
+		return qtrue;
+	}
+
+	// FIXME:
+	// restriction stuff for percentage is team dependant ...
+	wcount = G_WeaponCount(ent, weapon);	// fix: this counts in both teams..
+
+	// are there already  the absolute max. ingame allowed  of the weapon?..
+	if (weapon_restrictions[weapon].r_maxweap && wcount >= weapon_restrictions[weapon].maxweap)
+	{
+		// onscreen message..
+		if (!quiet && !(ent->client->ps.pm_flags & PMF_LIMBO))
+		{
+			CP(va("cp \"^1* ^3%s restricted. Maximum reached. ^1*^7\" 1", GetWeaponTableData(weapon)->desc));
+		}
+		return qtrue;
+	}
+
+	// is the percentage of players using the weapon not exceeded?..
+	if (weapon_restrictions[weapon].r_percentage && wcount >= level.numPlayingClients * 0.01f * weapon_restrictions[weapon].percentage)
+	{
+		// onscreen message..
+		if (!quiet && !(ent->client->ps.pm_flags & PMF_LIMBO))
+		{
+			CP(va("cp \"^1* ^3%s exceeded.\nGet more players. ^1*^7\" 1", GetWeaponTableData(weapon)->desc));
+		}
+		return qtrue;
+	}
+
+	// if we get here, the weapon is not restricted..
 	return qfalse;
 }
 
@@ -2033,7 +2054,7 @@ void G_SetClientWeapons(gentity_t *ent, weapon_t w1, weapon_t w2, qboolean updat
 		changed                              = qtrue;
 	}
 
-	if (!G_IsWeaponDisabled(ent, w1))
+	if (!G_IsWeaponDisabled(ent, w1, qfalse))
 	{
 		if (ent->client->sess.latchPlayerWeapon != w1)
 		{

@@ -823,7 +823,7 @@ void G_CheckForCursorHints(gentity_t *ent)
 						}
 
 						if (BG_WeaponIsPrimaryForClassAndTeam(ent->client->sess.playerType, ent->client->sess.sessionTeam, weapon) &&
-						    G_IsWeaponDisabled(ent, weapon))
+						    G_IsWeaponDisabled(ent, weapon, qfalse))
 						{
 							hintType = HINT_RESTRICTED;
 						}
