@@ -51,19 +51,19 @@ menuDef {
 	}
 
 	itemDef {
-		name		"clouds"
+		name		"sunset"
 		rect		0 0 640 WINDOW_HEIGHT // no resize on widescreen
 		style		WINDOW_STYLE_SHADER
-		background	"ui/assets/et_clouds"
+		background	"ui/assets/sunset.jpg"
 		visible		1
 		decoration
 	}
 
 	itemDef {
 		name		"image"
-		rect		$evalint(WINDOW_WIDTH/2-100) 140 200 200
+		rect		$evalint(WINDOW_WIDTH/2-147) 140 300 200
 		style		WINDOW_STYLE_SHADER
-		background	"ui/assets/etl_logo_huge_dark"
+		background	"ui/assets/et_logo_huge_dark"
 		visible		1
 		decoration
 	}

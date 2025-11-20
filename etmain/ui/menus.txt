@@ -89,4 +89,13 @@
 	loadMenu { "ui/ingame_tapout.menu" }
 	loadMenu { "ui/ingame_tapoutlms.menu" }
 	loadMenu { "ui/ingame_vote_bot.menu" }
+
+	// nq
+	loadMenu { "ui/options_nq.menu" }
+	loadMenu { "ui/options_nq_controls.menu" }
+	loadMenu { "ui/options_nq_display.menu" }
+	loadMenu { "ui/options_nq_sound.menu" }
+	loadMenu { "ui/options_nq_hud.menu" }
+	loadMenu { "ui/options_nq_tweak.menu" }
+	loadMenu { "ui/credits_no_quarter.menu" }
 }
