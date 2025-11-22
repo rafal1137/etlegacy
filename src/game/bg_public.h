@@ -1407,6 +1407,7 @@ typedef enum
 	EV_ITEM_PICKUP_QUIET,  ///< same, but don't play the default pickup sound as it was specified in the ent
 	EV_GLOBAL_ITEM_PICKUP, ///< powerup / team sounds are broadcast to everyone
 	EV_NOAMMO,
+	EV_BOUNCE_SOUND,
 	EV_WEAPONSWITCHED,
 	//EV_EMPTYCLIP,
 	EV_FILL_CLIP = 34,

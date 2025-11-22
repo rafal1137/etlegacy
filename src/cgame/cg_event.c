@@ -2200,6 +2200,17 @@ void CG_EntityEvent(centity_t *cent, vec3_t position)
 			trap_S_StartSound(NULL, es->number, CHAN_AUTO, cgs.media.watrGaspSound);
 		}
 		break;
+	case EV_BOUNCE_SOUND:
+		if (cg_weaponBounceSound.integer)
+		{
+			weaponInfo_t* weapon = &cg_weapons[es->weapon];
+
+			if ((!es->eventParm && weapon->bounceSound) || (es->eventParm && weapon->clipBounceSound))
+			{
+				trap_S_StartSound(NULL, es->number, CHAN_WEAPON, es->eventParm ? weapon->clipBounceSound : weapon->bounceSound);
+			}
+		}
+		break;
 	case EV_ITEM_PICKUP:
 	case EV_ITEM_PICKUP_QUIET:
 	{
