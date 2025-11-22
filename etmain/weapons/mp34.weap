@@ -6,6 +6,8 @@ weaponDef
 		standModel			"models/weapons2/mp34/mp34_3rd.md3"	// weapon pickup 'stand' (do we still use this?)
 		pickupModel			"models/weapons2/mp34/mp34_pickup.md3"
 		//pickupSound		"sound/misc/w_pkup.wav"
+		bounceSound			"sound/weapons/weaponbounce.wav"
+		clipBounceSound		"sound/weapons/clipbounce.wav"
 
 		weaponConfig		"models/weapons2/mp34/weapon.cfg"
 		handsModel			"models/weapons2/mp34/v_mp34_hand.md3"

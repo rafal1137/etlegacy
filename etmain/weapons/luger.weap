@@ -4,7 +4,9 @@ weaponDef
 	client {
 		standModel			"models/weapons2/luger/luger_stand.mdc"	// weapon pickup 'stand' (do we still use this?)
 		//pickupModel		""
-		//pickupSound		"sound/misc/w_pkup.wav"
+		pickupSound			"models/weapons2/luger/luger_pickup.md3"
+		bounceSound			"sound/weapons/weaponbounce.wav"
+		clipBounceSound		"sound/weapons/clipbounce.wav"
 
 		weaponConfig		"models/weapons2/luger/weapon.cfg"
 		handsModel			"models/weapons2/luger/v_luger_hand.mdc"

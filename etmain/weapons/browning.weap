@@ -6,6 +6,8 @@ weaponDef
 		droppedAnglesHack
 		pickupModel			"models/weapons2/browning/brown30cal_pickup.md3"
 		//pickupSound		"sound/misc/w_pkup.wav"
+		bounceSound				"sound/weapons/weaponbounce.wav"
+		clipBounceSound			"sound/weapons/clipbounce.wav"
 
 		weaponConfig		"models/multiplayer/mg42/weapon.cfg"
 		handsModel			"models/weapons2/browning/v_brown30cal_hand.md3"

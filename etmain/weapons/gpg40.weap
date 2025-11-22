@@ -4,7 +4,7 @@ weaponDef
 	client {
 		//standModel		""										// weapon pickup 'stand' (do we still use this?)
 		droppedAnglesHack
-		//pickupModel			"models/multiplayer/mauser/mauser_pickup.md3"
+		pickupModel			"models/multiplayer/kar98/kar98_gren_pickup.md3"
 		//pickupSound		"sound/misc/w_pkup.wav"
 
 		weaponConfig		"models/multiplayer/kar98/weapon.cfg"

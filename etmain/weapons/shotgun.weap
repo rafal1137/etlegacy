@@ -1,41 +1,42 @@
+
 weaponDef
 {
 	// This basically fills out weaponInfo_t
 	client {
-		standModel			"models/weapons2/thompson/thompson_stand.mdc"	// weapon pickup 'stand' (do we still use this?)
-		pickupModel			"models/weapons2/thompson/thompson.md3"
+		standModel			"models/weapons2/winchester/winchester_3rd.md3"	// weapon pickup 'stand' (do we still use this?)
+		pickupModel			"models/weapons2/winchester/winchester_pickup.md3"
 		//pickupSound		"sound/misc/w_pkup.wav"
 		bounceSound			"sound/weapons/weaponbounce.wav"
 		clipBounceSound		"sound/weapons/clipbounce.wav"
 
-		weaponConfig		"models/weapons2/thompson/weapon.cfg"
-		handsModel			"models/weapons2/thompson/v_thompson_hand.mdc"
+		weaponConfig		"models/weapons2/winchester/weapon.cfg"
+		handsModel			"models/weapons2/winchester/v_winchester_hand.md3"
 
 		flashDlightColor	1.0 0.6 0.23
-		flashSound			"sound/weapons/thompson/thompson_fire.wav"		// supports up to 4 flash sounds
-		flashEchoSound		"sound/weapons/thompson/thompson_far.wav"		// supports up to 4 flash echo sounds
-		//lastShotSound		""										// supports up to 4 last shot sounds
+		flashSound			"sound/weapons/shotgun/shotgun_fire.wav"		// supports up to 4 flash sounds
+		flashEchoSound		"sound/weapons/shotgun/shotgun_far.wav"			// supports up to 4 flash echo sounds
+		lastShotSound		"sound/weapons/shotgun/shotgun_lastshot.wav"	// supports up to 4 last shot sounds
 
 		//readySound		""
 		//firingSound		""									// no weapons seem to use this, basically it's a replacement hum for readysound, but then when firing
-		//overheatSound		""
-		reloadSound			"sound/weapons/thompson/thompson_reload.wav"
-		reloadFastSound		"sound/weapons/thompson/thompson_reload_fast.wav"		// some weapons have fast reloads due to the skill system
+		//overheatSound		"sound/weapons/sten/sten_heat.wav"
+		reloadSound			"sound/weapons/shotgun/shotgun_addshell.wav"
+		reloadFastSound		"sound/weapons/shotgun/shotgun_reloadpump.wav"	// some weapons have fast reloads due to the skill system
 		//spinupSound		""									// sound started when fire button goes down, and stepped on when the first fire event happens
 		//spindownSound		""									// sound called if the above is running but player doesn't follow through and fire
 		//switchSound		""									// allow overriding of weaponswitch sound
 		noAmmoSound         "sound/weapons/misc/fire_dry.wav"
 
-		weaponIcon			"icons/iconw_thompson"
+		weaponIcon			"icons/iconw_shotgun"
 		weaponIconScale		2
-		weaponSelectedIcon	"icons/iconw_thompson_1_select"
-		weaponSimpleIcon	"simpleicons/thompson"
+		weaponSelectedIcon	"icons/iconw_shotgun_1_select"
+		weaponSimpleIcon	"simpleicons/mp34"
 		weaponSimpleIconScale 2 1
 
-		weaponCardIcon      "gfx/limbo/weaponcard01"
+		weaponCardIcon      "gfx/limbo/weaponcard03"
 		weaponCardScale     1 1
 		weaponCardPointS    0 1
-		weaponCardPointT    0.875 1
+		weaponCardPointT    0.25 0.375
 
 		//missileModel		""
 		//missileSound		""
@@ -47,7 +48,7 @@ weaponDef
 
 		fireRecoil 0.3 0.6 0    // kick angle
 		adjustLean 1 1 1
-		reviveLowerHeight 3.8
+		reviveLowerHeight 5
 
 		//modModel 1		""
 
@@ -75,12 +76,13 @@ weaponDef
 		}
 
 		firstPerson {
-			model			"models/weapons2/thompson/v_thompson.md3"
-			flashModel		"models/weapons2/thompson/v_thompson_flash.mdc"
-			flashScale 0.35
+			model			"models/weapons2/winchester/v_winchester.md3"
+			flashModel		"models/weapons2/mp40/v_mp40_flash.mdc"
 
-			dynFov90 -3.0 3.5 0.0
-			dynFov120 2.5 -0.8 0.5
+			ejectBrassOffset	15.0 11.0 -8.0
+
+			dynFov90 -3.0 3.2 0.0
+			dynFov120 0.5 -0.3 -1.0
 
 			// weapon building
 			// the parts are numbered because there are some hardcoded references for some weapons to certain parts
@@ -88,28 +90,59 @@ weaponDef
 			{
 				part 0
 				{
-					tag		"tag_barrel"
-					model	"models/weapons2/thompson/v_thompson_barrel.mdc"
+					tag		"tag_slide"
+					model	"models/weapons2/winchester/v_winchester_slide.md3"
 				}
 				part 1
 				{
-					tag		"tag_barrel2"
-					model	"models/weapons2/thompson/v_thompson_barrel2.mdc"
+					tag		"tag_carrier"
+					model	"models/weapons2/winchester/v_winchester_carrier.md3"
 				}
 				part 2
 				{
-					tag			"tag_barrel3"
-					model		"models/weapons2/thompson/v_thompson_barrel3.mdc"
-					axisskin	"models/weapons2/thompson/thompson_axis.skin"
-					alliedskin	"models/weapons2/thompson/thompson_allied.skin"
+					tag		"tag_rarm"
+					model	"models/weapons2/winchester/v_winchester_rarm.md3"
+					axisskin	"models/weapons2/winchester/winchester_rarm_axis.skin"
+					alliedskin	"models/weapons2/winchester/winchester_rarm_allied.skin"
+				}
+				part 3
+				{
+					tag		"tag_shell"
+					model	"models/weapons2/winchester/v_winchester_shell.md3"
+				}
+				part 4
+				{
+					tag		"tag_bolt"
+					model	"models/weapons2/winchester/v_winchester_bolt.md3"
+				}
+				part 5
+				{
+					tag		"tag_hammer"
+					model	"models/weapons2/winchester/v_winchester_hammer.md3"
+				}
+				part 6
+				{
+					tag		"tag_sleeve"
+					model	"models/weapons2/winchester/v_winchester_sleeve.md3"
+				}
+				part 7
+				{
+					tag		"tag_shell2"
+					model	"models/weapons2/winchester/v_winchester_shell2.md3"
+				}
+				part 8
+				{
+					tag		"tag_arm"
+					model	"models/weapons2/winchester/v_winchester_larm.md3"			
+					axisskin	"models/weapons2/winchester/winchester_slide_axis.skin"
+					alliedskin	"models/weapons2/winchester/winchester_slide_allied.skin"
 				}
 			}
 		}
 
 		thirdPerson {
-			model			"models/weapons2/thompson/thompson.mdc"
-			flashModel		"models/weapons2/thompson/thompson_flash.mdc"
-			flashScale 0.9
+			model			"models/weapons2/winchester/winchester_3rd.md3"
+			flashModel		"models/weapons2/mp40/v_mp40_flash.mdc"
 
 			ejectBrassOffset	16 -4 24
 		}

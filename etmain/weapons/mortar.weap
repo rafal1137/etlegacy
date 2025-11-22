@@ -6,6 +6,8 @@ weaponDef
 		droppedAnglesHack
 		pickupModel		    "models/multiplayer/mortar/mortar_pickup.md3"
 		//pickupSound		"sound/misc/w_pkup.wav"
+		bounceSound			"sound/weapons/weaponbounce.wav"
+		clipBounceSound		"sound/weapons/clipbounce.wav"
 
 		weaponConfig		"models/multiplayer/mortar/weapon.cfg"
 		handsModel			"models/multiplayer/mortar/v_mortar_hand.md3"

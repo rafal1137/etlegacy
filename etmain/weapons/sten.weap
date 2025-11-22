@@ -5,6 +5,8 @@ weaponDef
 		standModel			"models/weapons2/sten/sten_stand.mdc"	// weapon pickup 'stand' (do we still use this?)
 		pickupModel			"models/weapons2/sten/sten.md3"
 		//pickupSound		"sound/misc/w_pkup.wav"
+		bounceSound			"sound/weapons/weaponbounce.wav"
+		clipBounceSound		"sound/weapons/clipbounce.wav"
 
 		weaponConfig		"models/weapons2/sten/weapon.cfg"
 		handsModel			"models/weapons2/sten/v_sten_hand.mdc"

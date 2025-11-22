@@ -6,6 +6,8 @@ weaponDef
 		droppedAnglesHack
 		pickupModel			"models/multiplayer/m1_garand/m1_garand_gren_pickup.md3"
 		//pickupSound		"sound/misc/w_pkup.wav"
+		bounceSound			"sound/weapons/weaponbounce.wav"
+		clipBounceSound		"sound/weapons/clipbounce.wav"
 
 		weaponConfig		"models/multiplayer/m1_garand/weapon.cfg"
 		handsModel			"models/multiplayer/m1_garand/v_m1_garand_hand.md3"

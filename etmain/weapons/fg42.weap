@@ -6,6 +6,8 @@ weaponDef
 		pickupModel			"models/weapons2/fg42/fg42.md3"
 		droppedAnglesHack
 		//pickupSound		"sound/misc/w_pkup.wav"
+		bounceSound			"sound/weapons/weaponbounce.wav"
+		clipBounceSound		"sound/weapons/clipbounce.wav"
 
 		weaponConfig		"models/weapons2/fg42/weapon.cfg"
 		handsModel			"models/weapons2/fg42/v_fg42_hand.mdc"

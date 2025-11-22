@@ -6,6 +6,8 @@ weaponDef // silenced kar98
 		droppedAnglesHack
 		pickupModel			"models/multiplayer/kar98/kar98_scope_pickup.md3"
 		//pickupSound		"sound/misc/w_pkup.wav"
+		bounceSound			"sound/weapons/weaponbounce.wav"
+		clipBounceSound		"sound/weapons/clipbounce.wav"
 
 		weaponConfig		"models/multiplayer/kar98/weapon2.cfg"
 		handsModel			"models/multiplayer/kar98/v_kar98_hand2.md3"

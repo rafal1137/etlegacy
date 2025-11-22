@@ -6,6 +6,8 @@ weaponDef
 		droppedAnglesHack
 		pickupModel			"models/multiplayer/mg42/mg42_pickup.md3"
 		//pickupSound		"sound/misc/w_pkup.wav"
+		bounceSound			"sound/weapons/weaponbounce.wav"
+		clipBounceSound		"sound/weapons/clipbounce.wav"
 
 		weaponConfig		"models/multiplayer/mg42/weapon.cfg"
 		handsModel			"models/multiplayer/mg42/v_mg42_hand.md3"
