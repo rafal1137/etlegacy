@@ -1422,6 +1422,11 @@ void UI_LoadMenus(const char *menuFile, qboolean reset)
 		trap_PC_AddGlobalDefine("FUI");
 	}
 
+	if (NOQUARTER)
+	{
+		trap_PC_AddGlobalDefine("NQUI");
+	}
+
 	// we can now add elements which only work with ET:Legacy client
 	if (uiInfo.etLegacyClient)
 	{
