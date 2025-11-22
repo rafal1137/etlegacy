@@ -35,6 +35,8 @@
  */
 
 #include "cg_local.h"
+#include "nq_server_help.h"	// core: NQ-help, documentation on settings, howto use, explaining bitflag values, etc..
+#include "nq_client_help.h"	// core: NQ-help, documentation on settings, howto use, explaining bitflag values, etc..
 
 char *Binding_FromName(const char *cvar);
 
@@ -3324,6 +3326,233 @@ static void CG_SetClosestSpawn_f(void)
 	}
 }
 
+static void CG_Server_Help_f(void)
+{
+	const char* Str = NULL;
+	int				count = sizeof(helpTexts) / sizeof(helpTexts[0]) - 1;
+	int				i = 0, lineNr = 0;
+	char* Txt = NULL;
+	char* colorLine = "^9--------------------------------------------\n";
+	char* colorCVar = "^A";
+	char* colorDesc = "^M";
+	char* colorDef = "^A";
+	char* colorSpecial = "^O";
+	qboolean		explain = qtrue;
+	unsigned int	category = 0;
+	int				argc = trap_Argc();
+	helpCategory_t* cat;
+
+	if (argc == 1)
+	{
+		explain = qtrue;
+	}
+	else if (argc >= 2)
+	{
+		Str = CG_Argv(1);
+		explain = (!Q_stricmpn("?", Str, 1)) ? qtrue : qfalse;
+		explain = (!Q_stricmpn("help", Str, 4)) ? qtrue : explain;
+	}
+
+	CG_Printf(colorLine);
+	// check for special arguments..
+	if (explain)
+	{
+		CG_Printf(va("%sNo Quarter %sSERVER%s help\n", colorDesc, colorSpecial, colorDesc));
+		CG_Printf(va("%sUsage:  nqadmin <cvar || special>\n\n", colorDesc));
+		CG_Printf(va("%sYou can enter a CVAR-name you want a description of.\n\n", colorDesc));
+		CG_Printf(va("%sYou can instead enter a special search-argument\n", colorDesc));
+		CG_Printf(va("%sto get a list of related CVARs.\n", colorDesc));
+		CG_Printf(va("%sThe special search-arguments are:\n", colorDesc));
+		// IRATA: create this list by serverHelpCategoriesNAMES ?
+		CG_Printf(va("%sweapons      spawning     warmup       logging      \n", colorSpecial));
+		CG_Printf(va("%ssecurity     xp           configs      messages     \n", colorSpecial));
+		CG_Printf(va("%ssoldier      medic        engineer     fieldops     \n", colorSpecial));
+		CG_Printf(va("%scovertops    voting       damage       penalty      \n", colorSpecial));
+		CG_Printf(va("%sskill        bots         time         duration     \n", colorSpecial));
+		CG_Printf(va("%sdistance     shortcuts    lua          debug        \n", colorSpecial));
+		CG_Printf(va("%sperformance  restrict     network                   \n", colorSpecial));
+		return;
+	}
+
+	for (cat = serverHelpCategories; cat->category; ++cat)
+	{
+		if (!Q_stricmp(cat->category, Str))
+		{
+			category = cat->flag;
+		}
+	}
+
+	if (!category)
+	{
+		// if found, print the CVar help-content from the nq_help array..
+		for (i = 0; i < count; ++i)
+		{
+			if (Q_stricmpn(helpTexts[i].cvar, Str, strlen(Str))) continue;
+			// the CVar..
+			CG_Printf(va("%s%s\n", colorCVar, helpTexts[i].cvar));
+			// the description..
+			for (lineNr = 0; lineNr < HELP_NUM_LINES; ++lineNr)
+			{
+				Txt = helpTexts[i].line[lineNr];
+				if (strlen(Txt) == 0) break;
+				CG_Printf(va("%s%s\n", colorDesc, Txt));
+			}
+			// the default value..
+			CG_Printf(va("%sDefault value: \"%s\"\n", colorDef, helpTexts[i].defVal));
+			CG_Printf(colorLine);
+		}
+		return;
+	}
+
+	// process special search arguments..
+	if (argc >= 2)
+	{
+		if (category & HELP_CAT_DOCU)
+		{
+			// common topics..
+			for (i = 0; i < count; ++i) {
+				if ((helpTexts[i].categories & category) == category)
+				{
+					// print the description..
+					for (lineNr = 0; lineNr < HELP_NUM_LINES; ++lineNr)
+					{
+						Txt = helpTexts[i].line[lineNr];
+						if (strlen(Txt) == 0) break;
+						CG_Printf(va("%s%s\n", colorDesc, Txt));
+					}
+				}
+			}
+		}
+		else
+		{
+			// Related CVars..
+			Txt = Q_strupr((char*)Str);
+			CG_Printf(va("%s%s%s related CVars are:\n", colorSpecial, Txt, colorDesc));
+			for (i = 0; i < count; ++i) {
+				if (helpTexts[i].categories & category)
+				{
+					// print the CVar..
+					CG_Printf(va("%s%s\n", colorCVar, helpTexts[i].cvar));
+				}
+			}
+		}
+	}
+	CG_Printf(colorLine);
+}
+
+static void CG_Client_Help_f(void)
+{
+	const char* Str = NULL;
+	int				count = sizeof(clientHelpTexts) / sizeof(clientHelpTexts[0]) - 1;
+	int				i = 0, lineNr = 0;
+	char* Txt = NULL;
+	char* colorLine = "^9--------------------------------------------\n";
+	char* colorCVar = "^A";
+	char* colorDesc = "^M";
+	char* colorDef = "^A";
+	char* colorSpecial = "^O";
+	qboolean		explain = qtrue;
+	unsigned int	category = 0;
+	int				argc = trap_Argc();
+	helpCategory_t* cat;
+
+	if (argc == 1)
+	{
+		explain = qtrue;
+	}
+	else if (argc >= 2)
+	{
+		Str = CG_Argv(1);
+		explain = (!Q_stricmpn("?", Str, 1)) ? qtrue : qfalse;
+		explain = (!Q_stricmpn("help", Str, 4)) ? qtrue : explain;
+	}
+
+	CG_Printf(colorLine);
+	// check for special arguments..
+	if (explain)
+	{
+		CG_Printf(va("%sNo Quarter %sCLIENT%s help.\n", colorDesc, colorSpecial, colorDesc));
+		CG_Printf(va("%sUsage:  nqhelp <cvar || special>\n\n", colorDesc));
+		CG_Printf(va("%sYou can enter a CVAR-name you want a description of.\n\n", colorDesc));
+		CG_Printf(va("%sYou can instead enter a special search-argument\n", colorDesc));
+		CG_Printf(va("%sto get a list of related CVars.\n", colorDesc));
+		CG_Printf(va("%sThe special search-arguments are:\n", colorDesc));
+		// IRATA: create this list by serverHelpCategoriesNAMES ?
+		CG_Printf(va("%svideo        audio        filter       tweak        \n", colorSpecial));
+		CG_Printf(va("%sweapon       hud          movement     cheat        \n", colorSpecial));
+		CG_Printf(va("%sdraw         client       fireteam     network      \n", colorSpecial));
+		CG_Printf(va("%sdemo         chat         debug        crosshair    \n", colorSpecial));
+		// CG_Printf(va("%sskill        bots         time         duration     \n",colorSpecial));
+
+		return;
+	}
+
+	for (cat = clientHelpCategories; cat->category; ++cat)
+	{
+		if (!Q_stricmp(cat->category, Str))
+		{
+			category = cat->flag;
+		}
+	}
+
+	if (!category)
+	{
+		// if found, print the CVar help-content from the nq_help array..
+		for (i = 0; i < count; ++i) {
+			if (Q_stricmpn(clientHelpTexts[i].cvar, Str, strlen(Str))) continue;
+			// the CVar..
+			CG_Printf(va("%s%s\n", colorCVar, clientHelpTexts[i].cvar));
+			// the description..
+			for (lineNr = 0; lineNr < HELP_NUM_LINES; ++lineNr)
+			{
+				Txt = clientHelpTexts[i].line[lineNr];
+				if (strlen(Txt) == 0) break;
+				CG_Printf(va("%s%s\n", colorDesc, Txt));
+			}
+			// the default value..
+			CG_Printf(va("%sDefault value: \"%s\"\n", colorDef, clientHelpTexts[i].defVal));
+			CG_Printf(colorLine);
+		}
+		return;
+	}
+
+	// process special search arguments..
+	if (argc >= 2)
+	{
+		if (category & CLIENT_HELP_CAT_DOCU)
+		{
+			// common topics..
+			for (i = 0; i < count; ++i)
+			{
+				if ((clientHelpTexts[i].categories & category) == category)
+				{
+					// print the description..
+					for (lineNr = 0; lineNr < HELP_NUM_LINES; ++lineNr)
+					{
+						Txt = clientHelpTexts[i].line[lineNr];
+						if (strlen(Txt) == 0) break;
+						CG_Printf(va("%s%s\n", colorDesc, Txt));
+					}
+				}
+			}
+		}
+		else
+		{
+			// Related CVars..
+			Txt = Q_strupr((char*)Str);
+			CG_Printf(va("%s%s%s related CVars are:\n", colorSpecial, Txt, colorDesc));
+			for (i = 0; i < count; ++i) {
+				if (clientHelpTexts[i].categories & category) {
+					// print the CVar..
+					CG_Printf(va("%s%s\n", colorCVar, clientHelpTexts[i].cvar));
+				}
+			}
+		}
+	}
+	CG_Printf(colorLine);
+
+}
+
 static consoleCommand_t commands[] =
 {
 	{ "testgun",                CG_TestGun_f              },
@@ -3470,6 +3699,9 @@ static consoleCommand_t commands[] =
 	{ "cg_crosshairY_f",        CG_CrosshairSizePos_f     },
 	{ "cg_crosshairScaleX_f",   CG_CrosshairSizePos_f     },
 	{ "cg_crosshairScaleY_f",   CG_CrosshairSizePos_f     },
+
+	{ "nqadmin",                CG_Server_Help_f },
+	{ "nqhelp",                 CG_Client_Help_f },
 
 	{ NULL,                     NULL                      }
 };
