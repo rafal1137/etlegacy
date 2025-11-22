@@ -1419,6 +1419,28 @@ static qboolean CG_RW_ParseClient(int handle, weaponInfo_t *weaponInfo)
 
 			weaponInfo->switchSound = trap_S_RegisterSound(filename, qfalse);
 		}
+		else if (!Q_stricmp(token.string, "bounceSound"))
+		{
+			if (!PC_String_ParseNoAlloc(handle, filename, sizeof(filename)))
+			{
+				return CG_RW_ParseError(handle, "expected bounceSound filename");
+			}
+			else
+			{
+				weaponInfo->bounceSound = trap_S_RegisterSound(filename, qfalse);
+			}
+		}
+		else if (!Q_stricmp(token.string, "clipBounceSound"))
+		{
+			if (!PC_String_ParseNoAlloc(handle, filename, sizeof(filename)))
+			{
+				return CG_RW_ParseError(handle, "expected clipBounceSound filename");
+			}
+			else
+			{
+				weaponInfo->clipBounceSound = trap_S_RegisterSound(filename, qfalse);
+			}
+		}
 		else if (!Q_stricmp(token.string, "noAmmoSound"))
 		{
 			if (!PC_String_ParseNoAlloc(handle, filename, sizeof(filename)))

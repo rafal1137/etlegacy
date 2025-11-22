@@ -1021,6 +1021,9 @@ typedef struct weaponInfo_s
 	sfxHandle_t impactMark[W_MAX_SND_SURF];
 	weaponSounds_t impactSound[W_MAX_SND_SURF];
 	impactParticle_t *impactParticle;
+
+	sfxHandle_t bounceSound;
+	sfxHandle_t clipBounceSound;
 } weaponInfo_t;
 
 #define MAX_VIEWDAMAGE  8
