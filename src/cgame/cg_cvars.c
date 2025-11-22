@@ -353,8 +353,6 @@ vmCvar_t cg_pmBigPopupTime;
 vmCvar_t cg_spectator;
 vmCvar_t cg_whizzSounds; // bullets flying by (integer part = distance, fraction part = trace.fraction)
 vmCvar_t cg_favWeaponBank; // 0=previously used weapon.  banks: 1=knife, 2=pistol, 3=SMG, 4=grenade // lastUsedWeaponBank - get next weapon after using cretain weapon (like panzer,airstrike,satchel etc)
-vmCvar_t cg_spawnTimer_set;      // spawntimer from etpub
-vmCvar_t cg_spawnTimer_period;   // spawntimer from etpub
 vmCvar_t cg_skillOptions;
 
 typedef struct
@@ -694,8 +692,6 @@ static cvarTable_t cvarTable[] =
 	{ &cg_spectator,                          "cg_spectator",                          "3",           CVAR_ARCHIVE,                 0 },
 	{ &cg_whizzSounds,                        "cg_whizzSounds",                        "1",           CVAR_ARCHIVE,                 0 },
 	{ &cg_favWeaponBank,                      "cg_favWeaponBank",                      "0",           CVAR_ARCHIVE,                 0 },
-	{ &cg_spawnTimer_set,                     "cg_spawnTimer_set",                     "-1",          CVAR_ARCHIVE,                 0 },
-	{ &cg_spawnTimer_period,                  "cg_spawnTimer_period",                  "0",           CVAR_ARCHIVE,                 0 },
 	{ &cg_skillOptions,                       "cg_skillOptions",                       "31",          CVAR_ARCHIVE,                 0 },
 };
 
